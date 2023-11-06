@@ -25,8 +25,6 @@ class UpdateSquadsRequest extends FormRequest
      */
     public function rules(): array
     {
-        // var_dump($squad = $this->route('squad'));
-        // exit();
         $squad = $this->route('squad');
         return [
             'leader_id' => 'required|integer',
