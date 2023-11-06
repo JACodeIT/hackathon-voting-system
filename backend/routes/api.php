@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 // import Controller below
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReferencePlacesController;
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\SquadsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +29,20 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+});
+
+Route::controller(ReferencePlacesController::class)->group(function () {
+    Route::get('regions', 'showRegions');
+    Route::get('province/{id}', 'showProvinces');
+    Route::get('citymun/{id}', 'showCityMuns');
+    Route::get('barangay/{id}', 'showBarangays');
+});
+
+Route::group([
+    'middleware' => 'api',
+], function ($router) {
+    Route::resource('events', EventsController::class, ['only' => ['index', 'show', 'store', 'update']]);
+    Route::post('/squads/{squad}/member', [SquadsController::class, 'attachMemberToSquad']);
+    Route::delete('/squads/{squad}/member/{member}', [SquadsController::class, 'detachMemberToSquad']);
+    Route::resource('squads', SquadsController::class, ['only' => ['index', 'show', 'store', 'update']]);
 });
