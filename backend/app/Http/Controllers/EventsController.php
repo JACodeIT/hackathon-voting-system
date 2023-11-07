@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Events;
+use App\Models\Event_Criteria;
+use App\Models\Event_Judges;
+use App\Models\Member;
+use App\Models\Criteria;
+use App\Models\Criterion;
 use App\Http\Requests\StoreEventsRequest;
 use App\Http\Requests\UpdateEventsRequest;
 
@@ -103,5 +108,104 @@ class EventsController extends Controller
     public function destroy(Events $events)
     {
         //
+    }
+
+    public function addCriteriaToEvent(Int $event_id, Request $request)
+    {
+        $eventCriteria = Event_Criteria::firstOrCreate([
+            'event_id' => $event_id,
+            'criteria_id' => $request->criteria_id
+        ]);
+
+        if(!$eventCriteria->wasRecentlyCreated){
+            return response()->json([
+                'message'   => Criterion::find(Criteria::find($request->criteria_id)->criterion_id)->criterion. ' is alreay a criterion of '. Events::find($event_id)->topic.'.',
+                'data'      => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                                ->where('id', $event_id)
+                                ->get()
+            ],400);
+        }
+
+        return response()->json([
+            'message'   => Criterion::find(Criteria::find($request->criteria_id)->criterion_id)->criterion. ' has been added to '. Events::find($event_id)->topic.'.',
+            'data'      => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                                    ->where('id', $event_id)
+                                    ->get()
+        ],200);
+    }
+
+    public function removeCriteriaToEvent(Int $event_id, Int $criteria_id, Request $request)
+    {
+        $eventCriteria = Event_Criteria::where('event_id', $event_id)
+                        ->where('criteria_id', $criteria_id)
+                        ->first();
+
+        if(!empty($eventCriteria)){
+            $eventCriteria->delete();
+
+            return response()->json([
+                'message'   => Criterion::find(Criteria::find($criteria_id)->criterion_id)->criterion. ' was removed from '. Events::find($event_id)->topic.'.',
+                'data'      => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                                ->where('id', $event_id)
+                                ->get()
+                ],200);
+        }
+
+        return response()->json([
+            'message'   => Criterion::find(Criteria::find($criteria_id)->criterion_id)->criterion. ' is not currently linked to '. Events::find($event_id)->topic.'.',
+            'data'      => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                                    ->where('id', $event_id)
+                                    ->get()
+        ],200);
+    }
+
+
+    public function addJudgeToEvent(Int $event_id, Request $request)
+    {
+        $eventJudge = Event_Judges::firstOrCreate([
+            'event_id' => $event_id,
+            'member_id' => $request->member_id
+        ]);
+
+        if(!$eventJudge->wasRecentlyCreated){
+            return response()->json([
+                'message'   => Member::find($request->member_id)->first_name. ' ' .Member::find($request->member_id)->last_name .' is alreay a judge for '. Events::find($event_id)->topic.'.',
+                'data'      => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                                ->where('id', $event_id)
+                                ->get()
+            ],400);
+        }
+
+        return response()->json([
+            'message'   => Member::find($request->member_id)->first_name. ' ' .Member::find($request->member_id)->last_name .' has been added as judge to '. Events::find($event_id)->topic.'.',
+            'data'      => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                                    ->where('id', $event_id)
+                                    ->get()
+        ],200);
+    }
+
+    public function removeJudgeToEvent(Int $event_id, Int $judge_id, Request $request)
+    {
+        $eventJudge = Event_Judges::where('event_id', $event_id)
+                        ->where('member_id', $judge_id)
+                        ->first();
+
+        if(!empty($eventJudge)){
+            $eventJudge->delete();
+
+            return response()->json([
+                'message'   => Member::find($judge_id)->first_name. ' ' .Member::find($judge_id)->last_name .' was removed as a judge to '. Events::find($event_id)->topic.'.',
+                'data'      => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                                ->where('id', $event_id)
+                                ->get()
+                ],200);
+        }
+
+        return response()->json([
+            'message'   => Member::find($judge_id)->first_name. ' ' .Member::find($judge_id)->last_name .' is not judge of '. Events::find($event_id)->topic.'.',
+            'data'      => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                                    ->where('id', $event_id)
+                                    ->get()
+        ],200);
     }
 }
