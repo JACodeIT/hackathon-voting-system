@@ -1,0 +1,684 @@
+{
+	"info": {
+		"_postman_id": "df3506e1-b0fe-4c4e-8cca-a88fc470586a",
+		"name": "Voting System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29560135"
+	},
+	"item": [
+		{
+			"name": "Auth Service",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "JA Cereno",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "joseangelito.cereno@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password@@123",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "Password@@123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/refresh",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/user-profile",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"user-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reference Places",
+			"item": [
+				{
+					"name": "Regions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/regions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"regions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Provinces",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/province/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"province",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cities & Municipalities",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/citymun/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"citymun",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Barangays",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/barangay/68",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"barangay",
+								"68"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events Service",
+			"item": [
+				{
+					"name": "Get Events",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "organizer_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "topic",
+									"value": "Voting System v2",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2023-11-04",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2023-11-12",
+									"type": "text"
+								},
+								{
+									"key": "announcement_date",
+									"value": "2023-11-15",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem Lorem Lorem",
+									"type": "text"
+								},
+								{
+									"key": "venue",
+									"value": "Discord",
+									"type": "text"
+								},
+								{
+									"key": "address_line_1",
+									"value": "Address Line 1",
+									"description": "optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "address_line_2",
+									"value": "Address Line 2",
+									"description": "optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "brgy_address",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "complete_address",
+									"value": "Address Line 1, Address Line 2, Brgy, City,",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "upcoming",
+									"type": "text"
+								},
+								{
+									"key": "banner_url",
+									"value": "url",
+									"type": "text"
+								},
+								{
+									"key": "isGroup",
+									"value": "1",
+									"description": "bool",
+									"type": "text"
+								},
+								{
+									"key": "number_of_members",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "public_can_vote",
+									"value": "0",
+									"description": "bool",
+									"type": "text"
+								},
+								{
+									"key": "member_can_vote",
+									"value": "1",
+									"description": "bool",
+									"type": "text"
+								},
+								{
+									"key": "public_numbers_of_vote",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "member_numbers_of_vote",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "judge_vote_percentage",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "member_vote_percentage",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "public_vote_percentage",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/events",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "organizer_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "topic",
+									"value": "Voting System v2",
+									"type": "text"
+								},
+								{
+									"key": "start_date",
+									"value": "2023-11-04",
+									"type": "text"
+								},
+								{
+									"key": "end_date",
+									"value": "2023-11-12",
+									"type": "text"
+								},
+								{
+									"key": "announcement_date",
+									"value": "2023-11-15",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem Lorem Lorem",
+									"type": "text"
+								},
+								{
+									"key": "venue",
+									"value": "Discord",
+									"type": "text"
+								},
+								{
+									"key": "address_line_1",
+									"value": "Address Line 1",
+									"description": "optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "address_line_2",
+									"value": "Address Line 2",
+									"description": "optional",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "brgy_address",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "complete_address",
+									"value": "Address Line 1, Address Line 2, Brgy, City,",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "upcoming",
+									"type": "text"
+								},
+								{
+									"key": "banner_url",
+									"value": "url",
+									"type": "text"
+								},
+								{
+									"key": "isGroup",
+									"value": "1",
+									"description": "bool",
+									"type": "text"
+								},
+								{
+									"key": "number_of_members",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "public_can_vote",
+									"value": "0",
+									"description": "bool",
+									"type": "text"
+								},
+								{
+									"key": "member_can_vote",
+									"value": "1",
+									"description": "bool",
+									"type": "text"
+								},
+								{
+									"key": "public_numbers_of_vote",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "member_numbers_of_vote",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "judge_vote_percentage",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "member_vote_percentage",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "public_vote_percentage",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/events",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
