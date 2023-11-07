@@ -20,13 +20,23 @@ class Squads extends Model
         return $this->hasOne(Member::class, 'id', 'leader_id')->select('id','first_name','middle_name','last_name','name_extension');
     }
 
-    // /**
-    //  * Get all of the members for the Squads
-    //  *
-    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
-    //  */
-    // public function members(): HasMany
-    // {
-    //     return $this->hasMany(Members::class, 'foreign_key', 'local_key');
-    // }
+    /**
+     * Get all of the members for the Squads
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function members()
+    {
+        return $this->belongsToMany(Member::class, 'squad_members', 'squad_id', 'member_id');
+    }
+
+    /**
+     * The events that belong to the Squads
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function events()
+    {
+        return $this->belongsToMany(Events::class, 'event_squads', 'squad_id', 'event_id');
+    }
 }
