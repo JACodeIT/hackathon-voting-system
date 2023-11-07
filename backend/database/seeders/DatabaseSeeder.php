@@ -14,13 +14,22 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@daedalus.codes',
-        ]);
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@daedalus.codes',
+        // ]);
 
         $this->call([
             DefaultPlaceSeeder::class,
+            UserSeeder::class,
+            MemberSeeder::class,
+            EventsSeeder::class,
+            SquadsSeeder::class,
+            CriterionSeeder::class,
+            CriteriaSeeder::class,
+            EventCriteriaSeeder::class,
+            EventJudgesSeeder::class,
+            JudgesScoreboardSeeder::class,
         ]);
     }
 }
