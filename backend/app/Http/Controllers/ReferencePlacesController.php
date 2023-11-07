@@ -36,7 +36,7 @@ class ReferencePlacesController extends Controller
      */
     public function showCityMuns(string $id)
     {
-        return CityMun::select('id', 'citymunDesc')->where('cityMun', $id)->get();
+        return CityMun::select('id', 'citymunDesc')->where('provinceID', $id)->get();
     }
 
 
