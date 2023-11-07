@@ -16,6 +16,7 @@ class SquadsController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index(Request $request)
     {
         return new SquadsCollection(count($request->all()) > 0 ?
@@ -52,6 +53,7 @@ class SquadsController extends Controller
     /**
      * Display the specified resource.
      */
+
     public function show(Int $id)
     {
         return new SquadsCollection(Squads::with('leader','members','events')
@@ -70,6 +72,7 @@ class SquadsController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     public function update(UpdateSquadsRequest $request, Int $squad_id)
     {
         $input = $request->all();

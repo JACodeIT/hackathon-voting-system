@@ -42,6 +42,7 @@ Route::group([
     'middleware' => 'api',
 ], function ($router) {
     Route::resource('events', EventsController::class, ['only' => ['index', 'show', 'store', 'update']]);
+
     Route::post('/squads/{squad}/member', [SquadsController::class, 'attachMemberToSquad']);
     Route::delete('/squads/{squad}/member/{member}', [SquadsController::class, 'detachMemberToSquad']);
     Route::resource('squads', SquadsController::class, ['only' => ['index', 'show', 'store', 'update']]);

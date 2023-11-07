@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SquadMembers extends Model
+class Event_Judges extends Model
 {
     use HasFactory;
 
-    protected $table = 'squad_members';
-  
+    protected $table = 'event_judges';
+
     protected $fillable = [
-        'squad_id',
+        'event_id',
         'member_id',
     ];
 }
