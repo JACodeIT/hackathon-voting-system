@@ -12,6 +12,7 @@ class Member extends Model
     protected $table = "members";
 
     protected $fillable = [
+        'user_id',
         'first_name',
         'middle_name',
         'last_name',
@@ -25,7 +26,7 @@ class Member extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function squads(): BelongsToMany
+    public function squads()
     {
         return $this->belongsToMany(Squads::class, 'squad_members', 'member_id', 'squad_id');
     }
