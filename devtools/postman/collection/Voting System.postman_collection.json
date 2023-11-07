@@ -220,17 +220,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/regions",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/regions",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"regions"
 							]
 						}
@@ -259,17 +253,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/province/1",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/province/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"province",
 								"1"
 							]
@@ -299,17 +287,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/citymun/3",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/citymun/3",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"citymun",
 								"3"
 							]
@@ -339,17 +321,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/barangay/68",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/barangay/68",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"barangay",
 								"68"
 							]
@@ -366,7 +342,23 @@
 					"name": "Get Events",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/events",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "upcoming",
+									"disabled": true
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -374,7 +366,17 @@
 					"name": "Get Event",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/events/1",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -396,7 +398,7 @@
 								},
 								{
 									"key": "topic",
-									"value": "Voting System v2",
+									"value": "Voting System ",
 									"type": "text"
 								},
 								{
@@ -416,7 +418,7 @@
 								},
 								{
 									"key": "description",
-									"value": "Lorem Lorem Lorem",
+									"value": "Join our high-energy hackathon on November 4, 2023, at 10:30 PM! Unleash your creativity, collaborate with fellow innovators, and create something amazing. Your presence is essential for this epic tech challenge. A roll call will be done. Dont miss out!",
 									"type": "text"
 								},
 								{
@@ -457,7 +459,7 @@
 								},
 								{
 									"key": "banner_url",
-									"value": "url",
+									"value": "https://daedalus.codes/neon-robot.webp",
 									"type": "text"
 								},
 								{
@@ -511,17 +513,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/events",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/events",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"events"
 							]
 						}
@@ -607,7 +603,7 @@
 								},
 								{
 									"key": "banner_url",
-									"value": "url",
+									"value": "https://daedalus.codes/neon-robot.webp",
 									"type": "text"
 								},
 								{
@@ -661,7 +657,117 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/events",
+							"raw": "{{api_gateway}}api/events/1?_method=PATCH",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PATCH"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Criteria to Event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "criteria_id",
+									"value": "7",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/criteria",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"criteria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Criteria from Event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/criteria/7",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"criteria",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Judge to Event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "member_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/judges",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"judges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Judge from Event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/events/1/judges/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -672,14 +778,16 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"events"
+								"events",
+								"1",
+								"judges",
+								"1"
 							]
 						}
 					},
 					"response": []
 				}
 			]
-
 		},
 		{
 			"name": "Squads Service",
@@ -773,7 +881,7 @@
 					"response": []
 				},
 				{
-					"name": "Update Event",
+					"name": "Update Squad",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -861,7 +969,165 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/squads/2/member/3",
+							"raw": "{{api_gateway}}api/squads/2/member/3",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"squads",
+								"2",
+								"member",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Members Service",
+			"item": [
+				{
+					"name": "Get Members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/members",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/members/1",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Member",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "John",
+									"type": "text"
+								},
+								{
+									"key": "middle_name",
+									"value": "Dela Cruz",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Doe",
+									"type": "text"
+								},
+								{
+									"key": "github_account",
+									"value": "JohnTheDoe",
+									"type": "text"
+								},
+								{
+									"key": "discord_username",
+									"value": "JohnTheDoe",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/members",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Member",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "first_name",
+									"value": "Johnny",
+									"type": "text"
+								},
+								{
+									"key": "middle_name",
+									"value": "Dela Cruz",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "last_name",
+									"value": "Doe",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "github_account",
+									"value": "JohnTheDoe",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "discord_username",
+									"value": "JohnTheDoe",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/members/5?_method=PATCH",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -872,10 +1138,316 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"squads",
-								"2",
-								"member",
-								"3"
+								"members",
+								"5"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PATCH"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Criterion",
+			"item": [
+				{
+					"name": "Get Criterions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/members",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Criterion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/criterions/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"criterions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Criterion",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "criterion",
+									"value": "Scalability",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "fooooobar",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/criterions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"criterions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Criterion",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "criterion",
+									"value": "Scalibility and Magic",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Foobar Updated",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/criterions/6?_method=PATCH",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"criterions",
+								"6"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PATCH"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Criteria",
+			"item": [
+				{
+					"name": "Get Criterions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/members",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Criterion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/criterions/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"criterions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Criteria",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "criterion_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "min_rating",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "max_rating",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "percentage_value",
+									"value": "20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/criterias",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"criterias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Criteria",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "criterion_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "min_rating",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "max_rating",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "percentage_value",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/criterias/8?_method=PATCH",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"criterias",
+								"8"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PATCH"
+								}
 							]
 						}
 					},
