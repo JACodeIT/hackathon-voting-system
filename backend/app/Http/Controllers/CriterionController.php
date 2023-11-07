@@ -6,6 +6,9 @@ use App\Models\Criterion;
 use App\Http\Requests\StoreCriterionRequest;
 use App\Http\Requests\UpdateCriterionRequest;
 
+use App\Http\Resources\CriterionCollection;
+use Illuminate\Http\Request;
+
 class CriterionController extends Controller
 {
     /**
@@ -13,7 +16,7 @@ class CriterionController extends Controller
      */
     public function index()
     {
-        //
+        return new CriterionCollection(Criterion::all());
     }
 
     /**
@@ -29,15 +32,23 @@ class CriterionController extends Controller
      */
     public function store(StoreCriterionRequest $request)
     {
-        //
+        $criterion = Criterion::create([
+            'criterion' => $request->criterion,
+            'description' => $request->description,
+        ]);
+
+        return response()->json([
+            'message'   => $criterion->criterion. ' has been added.',
+            'data'      => Criterion::where('id', $criterion->id)->get()
+        ],200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Criterion $criterion)
+    public function show(Int $id)
     {
-        //
+        return new CriterionCollection(Criterion::where('id', $id)->get());
     }
 
     /**
@@ -51,9 +62,17 @@ class CriterionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCriterionRequest $request, Criterion $criterion)
+    public function update(UpdateCriterionRequest $request, Int $criterion_id)
     {
-        //
+        $input = $request->all();
+        unset($input['_method']);
+
+        Criterion::where('id', $criterion_id)->update($input);
+
+        return response()->json([
+            'message'   => Criterion::find($criterion_id)->criterion.' details was updated.',
+            'data'      => Criterion::where('id', $criterion_id)->get()
+        ],200);
     }
 
     /**

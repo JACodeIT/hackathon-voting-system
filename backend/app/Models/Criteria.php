@@ -19,12 +19,12 @@ class Criteria extends Model
     ];
 
     /**
-     * Get the user associated with the Criteria
+     * Get the criterion associated with the Criteria
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function criterion()
     {
-        return $this->hasOne(Criterion::class, 'id', 'criterion_id')->select('id', 'criterion','description');
+        return $this->hasOne(Criterion::class, 'id', 'criterion_id');
     }
 }
