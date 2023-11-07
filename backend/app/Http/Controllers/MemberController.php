@@ -6,14 +6,19 @@ use App\Models\Member;
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
 
+use App\Http\Resources\MembersCollection;
+use Illuminate\Http\Request;
+
 class MemberController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return new MembersCollection(count($request->all()) > 0 ?
+                Member::with('squads','account')->where('status', $request->status)->get() :
+                Member::with('squads','account')->get());
     }
 
     /**
@@ -29,15 +34,32 @@ class MemberController extends Controller
      */
     public function store(StoreMemberRequest $request)
     {
-        //
+        $member = Member::create([
+            'user_id'                => $request->user_id,
+            'first_name'             => $request->first_name,
+            'middle_name'            => $request->middle_name,
+            'last_name'              => $request->last_name,
+            'name_extension'         => $request->name_extension,
+            'github_account'         => $request->github_account,
+            'discord_username'       => $request->discord_username,
+        ]);
+
+        return response()->json([
+            'message'   => $member->first_name.' ' . $member->last_name. ' has been registered.',
+            'data'      =>  Member::with('account')
+                            ->where('id', $member->id)
+                            ->get()
+        ],200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Member $member)
+    public function show(Int $id)
     {
-        //
+        return new MembersCollection(Member::with('squads','account')
+                                        ->where('id', $id)
+                                        ->get());
     }
 
     /**
@@ -51,9 +73,19 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMemberRequest $request, Member $member)
+    public function update(UpdateMemberRequest $request, Int $member_id)
     {
-        //
+        $input = $request->all();
+        unset($input['_method']);
+
+        Member::where('id', $member_id)->update($input);
+
+        return response()->json([
+            'message'   => Member::find($member_id)->first_name.' '.Member::find($member_id)->last_name.' details was updated.',
+            'data'      => Member::with('squads','account')
+                            ->where('id', $member_id)
+                            ->get()
+        ],200);
     }
 
     /**
