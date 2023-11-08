@@ -7,44 +7,44 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use DB;
 
-class SquadsSeeder extends Seeder
+class EventSquadsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('squads')->insert([
-            'leader_id'=>4,
-            'name'=>'Team CHIBOG',
+        DB::table('event_squads')->insert([
+            'event_id'=>1,
+            'squad_id'=>1,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
 
-        DB::table('squads')->insert([
-            'leader_id'=>9,
-            'name'=>'ReactPressPHP',
+        DB::table('event_squads')->insert([
+            'event_id'=>1,
+            'squad_id'=>2,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
 
-        DB::table('squads')->insert([
-            'leader_id'=>14,
-            'name'=>'CastAway',
+        DB::table('event_squads')->insert([
+            'event_id'=>1,
+            'squad_id'=>3,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
 
-        DB::table('squads')->insert([
-            'leader_id'=>19,
-            'name'=>'Performance task sa mapeh',
+        DB::table('event_squads')->insert([
+            'event_id'=>1,
+            'squad_id'=>4,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
 
-        DB::table('squads')->insert([
-            'leader_id'=>25,
-            'name'=>"D'Rocketeers",
+        DB::table('event_squads')->insert([
+            'event_id'=>1,
+            'squad_id'=>5,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);

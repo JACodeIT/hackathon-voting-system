@@ -15,4 +15,15 @@ class Event_Criteria extends Model
         'event_id',
         'criteria_id',
     ];
+
+
+    /**
+     * Get all of the criteria for the Event_Criteria
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function criteria(): HasMany
+    {
+        return $this->hasMany(Criteria::class, 'criteria_id', 'id');
+    }
 }

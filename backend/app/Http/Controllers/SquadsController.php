@@ -56,6 +56,12 @@ class SquadsController extends Controller
 
     public function show(Int $id)
     {
+        if(is_null(Squads::find($id))){
+            return response()->json([
+                'error' => true,
+                'message' => 'Squad does not exist.'
+            ]);
+        }
         return new SquadsCollection(Squads::with('leader','members','events')
                                         ->where('id', $id)
                                         ->get());

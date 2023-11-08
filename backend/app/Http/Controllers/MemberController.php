@@ -57,6 +57,12 @@ class MemberController extends Controller
      */
     public function show(Int $id)
     {
+        if(is_null(Member::find($id))){
+            return response()->json([
+                'error' => true,
+                'message' => 'Member does not exist.'
+            ]);
+        }
         return new MembersCollection(Member::with('squads','account')
                                         ->where('id', $id)
                                         ->get());

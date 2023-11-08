@@ -51,6 +51,12 @@ class CriteriaController extends Controller
      */
     public function show(Int $id)
     {
+        if(is_null(Criteria::find($id))){
+            return response()->json([
+                'error' => true,
+                'message' => 'Criteria does not exist.'
+            ]);
+        }
         return new CriteriaCollection(Criteria::where('id', $id)->get());
     }
 
