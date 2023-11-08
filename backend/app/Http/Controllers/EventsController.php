@@ -286,6 +286,17 @@ class EventsController extends Controller
 
     public function getTotalScoreFromJudges(Int $event_id, Int $squad_id, Request $request)
     {
+        if($this->checkIfAllJudgeHasAlreadyScored($event_id, $squad_id)){
+            return response()->json([
+                'message' => 'Results for '.$this->getSquadName($squad_id).' is not ready. Waiting for all judges to complete their votes.',
+                'data'  => [
+                    'squadName' => $this->getSquadName($squad_id),
+                    'squadLeader' => $this->getSquadLeaderName($squad_id),
+                    'judges' => $this->getJudgesListForEvent($event_id),
+                ],
+            ]);
+        }
+
         return response()->json([
             'message' => 'Results for '.$this->getSquadName($squad_id),
             'data'  => [
@@ -298,11 +309,38 @@ class EventsController extends Controller
         ]);
     }
 
+    private function checkIfAllJudgeHasAlreadyScored(Int $event_id, Int $squad_id)
+    {
+        return $this->countScoredJudges($event_id, $squad_id)->eventJudge === $this->countScoredJudges($event_id, $squad_id)->eventJudge;
+    }
+
+    private function countScoredJudges(Int $event_id, Int $squad_id)
+    {
+
+        return  DB::table('judges_scoreboards as judges_scoreboards')
+                    ->join('event_criterias','event_criterias.id', '=', 'judges_scoreboards.event_criteria')
+                    ->where('event_criterias.event_id', $event_id)
+                    ->where('judges_scoreboards.squad_id',$squad_id)
+                    ->select(DB::raw('COUNT(DISTINCT judges_scoreboards.event_judge) as eventJudge'))
+                    ->first();
+    }
+
     public function getFinalScoresFromJudgesAndCommunity(Int $event_id, Int $squad_id, Request $request)
     {
         $total = $this->applyJudgeScoreWeight($event_id, $squad_id) +
                     $this->getCommunityVotesPercentage($squad_id, $event_id) +
                     $this->getPublicVotesPercentage($squad_id, $event_id);
+
+        if($this->checkIfAllJudgeHasAlreadyScored($event_id, $squad_id)){
+            return response()->json([
+                'message' => 'Results for '.$this->getSquadName($squad_id).' is not ready. Waiting for all judges to complete their votes.',
+                'data'  => [
+                    'squadName' => $this->getSquadName($squad_id),
+                    'squadLeader' => $this->getSquadLeaderName($squad_id),
+                    'judges' => $this->getJudgesListForEvent($event_id),
+                ],
+            ]);
+        }
         return response()->json([
             'message' => 'Results for '.$this->getSquadName($squad_id),
             'data'  => [
