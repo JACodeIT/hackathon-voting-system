@@ -957,7 +957,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_gateway}}/api/squads",
+							"raw": "{{api_gateway}}api/squads",
 							"host": [
 								"{{api_gateway}}"
 							],
