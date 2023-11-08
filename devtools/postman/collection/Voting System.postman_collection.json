@@ -7,201 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Auth Service",
-			"item": [
-				{
-					"name": "Register User",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "JA Cereno",
-									"type": "text"
-								},
-								{
-									"key": "email",
-									"value": "joseangelito.cereno@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "Password@@123",
-									"type": "text"
-								},
-								{
-									"key": "password_confirmation",
-									"value": "Password@@123",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/auth/register",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"auth",
-								"register"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "email",
-									"value": "{{email}}",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "{{password}}",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/auth/login",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Refresh Token",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/auth/refresh",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"auth",
-								"refresh"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Logout",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/auth/logout",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"auth",
-								"logout"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "User Profile",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{access_token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/auth/user-profile",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"auth",
-								"user-profile"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Reference Places",
 			"item": [
 				{
@@ -328,6 +133,333 @@
 							"path": [
 								"barangay",
 								"68"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth Service",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "Oshiiii",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "oshi-senpai@daedalus.codes",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Password@@123",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "Password@@123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/auth/register",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/auth/login",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/auth/refresh",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/auth/logout",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/auth/user-profile",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"auth",
+								"user-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Members Service",
+			"item": [
+				{
+					"name": "Get Members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/members",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/members/1",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Member",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "first_name",
+									"value": "John",
+									"type": "text"
+								},
+								{
+									"key": "middle_name",
+									"value": "Dela Cruz",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Doe",
+									"type": "text"
+								},
+								{
+									"key": "github_account",
+									"value": "JohnTheDoe",
+									"type": "text"
+								},
+								{
+									"key": "discord_username",
+									"value": "JohnTheDoe",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/members",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Member",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "first_name",
+									"value": "Johnny",
+									"type": "text"
+								},
+								{
+									"key": "middle_name",
+									"value": "Dela Cruz",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "last_name",
+									"value": "Doe",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "github_account",
+									"value": "JohnTheDoe",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "discord_username",
+									"value": "JohnTheDoe",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/members/5?_method=PATCH",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"members",
+								"5"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "PATCH"
+								}
 							]
 						}
 					},
@@ -707,14 +839,14 @@
 				{
 					"name": "Remove Criteria from Event",
 					"request": {
-						"method": "DELETE",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{api_gateway}}api/events/1/criteria/7",
+							"raw": "{{api_gateway}}api/events/1/criteria/7?_method=DELETE",
 							"host": [
 								"{{api_gateway}}api"
 							],
@@ -723,6 +855,12 @@
 								"1",
 								"criteria",
 								"7"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "DELETE"
+								}
 							]
 						}
 					},
@@ -760,28 +898,49 @@
 				{
 					"name": "Remove Judge from Event",
 					"request": {
-						"method": "DELETE",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/events/1/judges/1",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/events/1/judges/1?_method=DELETE",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"events",
 								"1",
 								"judges",
 								"1"
+							],
+							"query": [
+								{
+									"key": "_method",
+									"value": "DELETE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Count Number of Judges per Event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/squads/1/getFinalScore",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"squads",
+								"1",
+								"getFinalScore"
 							]
 						}
 					},
@@ -798,15 +957,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/squads",
-							"protocol": "http",
+							"raw": "{{api_gateway}}/api/squads",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"squads"
@@ -821,19 +975,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/squads/2",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/squads/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"squads",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -863,17 +1011,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/squads",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/squads",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"squads"
 							]
 						}
@@ -904,17 +1046,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/squads/5?_method=PATCH",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/squads/5?_method=PATCH",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"squads",
 								"5"
 							],
@@ -938,25 +1074,19 @@
 							"formdata": [
 								{
 									"key": "member_id",
-									"value": "3",
+									"value": "4",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/squads/2/member",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/squads/1/member",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"squads",
-								"2",
+								"1",
 								"member"
 							]
 						}
@@ -964,12 +1094,12 @@
 					"response": []
 				},
 				{
-					"name": "Unassign Member to a Squad Copy",
+					"name": "Unassign Member to a Squad",
 					"request": {
-						"method": "DELETE",
+						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{api_gateway}}api/squads/2/member/3",
+							"raw": "{{api_gateway}}api/squads/2/member/3?_method=DELETE",
 							"host": [
 								"{{api_gateway}}api"
 							],
@@ -978,173 +1108,11 @@
 								"2",
 								"member",
 								"3"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Members Service",
-			"item": [
-				{
-					"name": "Get Members",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{api_gateway}}api/members",
-							"host": [
-								"{{api_gateway}}api"
-							],
-							"path": [
-								"members"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Member",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{api_gateway}}api/members/1",
-							"host": [
-								"{{api_gateway}}api"
-							],
-							"path": [
-								"members",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Member",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "user_id",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "first_name",
-									"value": "John",
-									"type": "text"
-								},
-								{
-									"key": "middle_name",
-									"value": "Dela Cruz",
-									"type": "text"
-								},
-								{
-									"key": "last_name",
-									"value": "Doe",
-									"type": "text"
-								},
-								{
-									"key": "github_account",
-									"value": "JohnTheDoe",
-									"type": "text"
-								},
-								{
-									"key": "discord_username",
-									"value": "JohnTheDoe",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{api_gateway}}api/members",
-							"host": [
-								"{{api_gateway}}api"
-							],
-							"path": [
-								"members"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Member",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "user_id",
-									"value": "1",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "first_name",
-									"value": "Johnny",
-									"type": "text"
-								},
-								{
-									"key": "middle_name",
-									"value": "Dela Cruz",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "last_name",
-									"value": "Doe",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "github_account",
-									"value": "JohnTheDoe",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "discord_username",
-									"value": "JohnTheDoe",
-									"type": "text",
-									"disabled": true
-								}
-							]
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/members/5?_method=PATCH",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"members",
-								"5"
 							],
 							"query": [
 								{
 									"key": "_method",
-									"value": "PATCH"
+									"value": "DELETE"
 								}
 							]
 						}
@@ -1162,18 +1130,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/members",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/criterions",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"members"
+								"criterions"
 							]
 						}
 					},
@@ -1185,17 +1147,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/criterions/1",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/criterions/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"criterions",
 								"1"
 							]
@@ -1227,17 +1183,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/criterions",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/criterions",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"criterions"
 							]
 						}
@@ -1268,17 +1218,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/criterions/6?_method=PATCH",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/criterions/6?_method=PATCH",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"criterions",
 								"6"
 							],
@@ -1298,46 +1242,34 @@
 			"name": "Criteria",
 			"item": [
 				{
-					"name": "Get Criterions",
+					"name": "Get Criterias",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/members",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/criterias",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"members"
+								"criterias"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get Criterion",
+					"name": "Get Criteria",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/criterions/1",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/criterias/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"criterions",
+								"criterias",
 								"1"
 							]
 						}
@@ -1378,17 +1310,11 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/criterias",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/criterias",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"criterias"
 							]
 						}
@@ -1408,7 +1334,7 @@
 							"formdata": [
 								{
 									"key": "criterion_id",
-									"value": "3",
+									"value": "5",
 									"type": "text"
 								},
 								{
@@ -1418,36 +1344,284 @@
 								},
 								{
 									"key": "max_rating",
-									"value": "10",
+									"value": "5",
 									"type": "text"
 								},
 								{
 									"key": "percentage_value",
-									"value": "0",
+									"value": "20",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/criterias/8?_method=PATCH",
-							"protocol": "http",
+							"raw": "{{api_gateway}}api/criterias/5?_method=PATCH",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{api_gateway}}api"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"criterias",
-								"8"
+								"5"
 							],
 							"query": [
 								{
 									"key": "_method",
 									"value": "PATCH"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Record Scores",
+			"item": [
+				{
+					"name": "Community Votes",
+					"item": [
+						{
+							"name": "Cast Vote",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "squad_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "event_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "member_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_gateway}}api/community-votes",
+									"host": [
+										"{{api_gateway}}api"
+									],
+									"path": [
+										"community-votes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Community Votes received by Squad",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_gateway}}api/community-votes/events/1/squads/1",
+									"host": [
+										"{{api_gateway}}api"
+									],
+									"path": [
+										"community-votes",
+										"events",
+										"1",
+										"squads",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Public Votes",
+					"item": [
+						{
+							"name": "Cast Vote",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "squad_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "event_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "member_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_gateway}}api/community-votes",
+									"host": [
+										"{{api_gateway}}api"
+									],
+									"path": [
+										"community-votes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Public Votes received by Squad",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_gateway}}api/public-votes/events/1/squads/1",
+									"host": [
+										"{{api_gateway}}api"
+									],
+									"path": [
+										"public-votes",
+										"events",
+										"1",
+										"squads",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Record Judge Score",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t{\r\n\t\t\"event_criteria_id\": 1,\r\n\t\t\"rating\": 4.22\r\n\t},\r\n\t{\r\n\t\t\"event_criteria_id\": 2,\r\n\t\t\"rating\": 3.5\r\n\t},\r\n    {\r\n\t\t\"event_criteria_id\": 3,\r\n\t\t\"rating\": 4\r\n\t},\r\n    {\r\n\t\t\"event_criteria_id\": 4,\r\n\t\t\"rating\": 2\r\n\t},\r\n    {\r\n\t\t\"event_criteria_id\": 5,\r\n\t\t\"rating\": 5\r\n\t}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/judges/1/squads/1/scores",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"judges",
+								"1",
+								"squads",
+								"1",
+								"scores"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Scores",
+			"item": [
+				{
+					"name": "Judge Score for squad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/judges/1/squads/1/getJudgeScore",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"judges",
+								"1",
+								"squads",
+								"1",
+								"getJudgeScore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total Score from judges",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/squads/1/getTotalScoreFromJudges",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"squads",
+								"1",
+								"getTotalScoreFromJudges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Final Score of Squad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/squads/1/getFinalScore",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"squads",
+								"1",
+								"getFinalScore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Final Score of All Squads who participated in the Event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/squads/1/getFinalScore",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"squads",
+								"1",
+								"getFinalScore"
 							]
 						}
 					},
