@@ -25,10 +25,13 @@ class DatabaseSeeder extends Seeder
             MemberSeeder::class,
             EventsSeeder::class,
             SquadsSeeder::class,
+            SquadsSeeder::class,
             CriterionSeeder::class,
             CriteriaSeeder::class,
             EventCriteriaSeeder::class,
             EventJudgesSeeder::class,
+            EventSquadsSeeder::class,
+            SquadMembersSeeder::class,
             JudgesScoreboardSeeder::class,
         ]);
     }
