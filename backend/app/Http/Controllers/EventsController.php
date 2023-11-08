@@ -212,7 +212,6 @@ class EventsController extends Controller
 
     public function recordEventJudgeSquadScores(Int $event_id, Int $judge_id, Int $squad_id, Request $request)
     {
-        return $request[0]['event_criteria_id'];
         if(count($request->all()) == 0){
             return response()->json([
                 'error'         => true,
@@ -222,15 +221,15 @@ class EventsController extends Controller
 
         $insertedData = [];
         for($i = 0 ; $i < count($request->all()) ; $i++){
-            $rating = $this->getMinAndMaxScoreRating($event_id, $request->event_criteria_id[$i]);
-            $hasAlreadyScored = Judges_Scoreboard::where('event_judge', $judge_id)->where('squad_id', $squad_id)->where('event_criteria', $request->event_criteria_id[$i])->get();
+            $rating = $this->getMinAndMaxScoreRating($event_id, $request[$i]['event_criteria_id']);
+            $hasAlreadyScored = Judges_Scoreboard::where('event_judge', $judge_id)->where('squad_id', $squad_id)->where('event_criteria', $request[$i]['event_criteria_id'])->get();
 
-            if($request->rating[$i] < $rating->min_rating || $request->rating[$i] > $rating->max_rating){
+            if($request[$i]['rating'] < $rating->min_rating || $request[$i]['rating'] > $rating->max_rating){
                 return response()->json([
                     'error'         => true,
                     'message'       => 'Judge score must be equal or greater than '.$rating->min_rating.' and less than or equal to '.$rating->max_rating,
                     'criterion'     => $rating->criterion,
-                    'rating'        => $request->rating[$i]
+                    'rating'        => $request[$i]['rating']
                 ],400);
             }
 
@@ -245,8 +244,8 @@ class EventsController extends Controller
             $judgesScoreboard = Judges_Scoreboard::create([
                 'event_judge' => $judge_id,
                 'squad_id' => $squad_id,
-                'event_criteria' => $request->event_criteria_id[$i],
-                'score' => $request->rating[$i]
+                'event_criteria' => $request[$i]['event_criteria_id'],
+                'score' => $request[$i]['rating']
             ]);
 
             array_push($insertedData, $judgesScoreboard);
