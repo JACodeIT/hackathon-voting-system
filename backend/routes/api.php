@@ -11,6 +11,8 @@ use App\Http\Controllers\SquadsController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CriterionController;
 use App\Http\Controllers\CriteriaController;
+use App\Http\Controllers\CommunityVotesController;
+use App\Http\Controllers\PublicVotesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,14 +50,27 @@ Route::group([
     Route::delete('/events/{event}/criteria/{criteria}', [EventsController::class, 'removeCriteriaToEvent']);
     Route::post('/events/{event}/judges', [EventsController::class, 'addJudgeToEvent']);
     Route::delete('/events/{event}/judges/{judge}', [EventsController::class, 'removeJudgeToEvent']);
+    Route::get('/events/{event}/judges/{judges}/squads/{squads}/scores', [EventsController::class, 'getEventJudgeSquadScores']);
+    Route::post('/events/{event}/judges/{judges}/squads/{squads}/scores', [EventsController::class, 'recordEventJudgeSquadScores']);
+    Route::get('/events/{event}/judges/{judges}/squads/{squads}/getJudgeScore', [EventsController::class, 'calculateJudgeScore']);
+    Route::get('/events/{event}/squads/{squads}/getTotalScoreFromJudges', [EventsController::class, 'getTotalScoreFromJudges']);
+    Route::get('/events/{event}/squads/{squads}/getFinalScore', [EventsController::class, 'getFinalScoresFromJudgesAndCommunity']);
+    Route::get('/events/{event}/getEventsFinalScore', [EventsController::class, 'getAllFinalScoresFromJudgesAndCommunity']);
+    Route::get('/events/{event}/countJudges', [EventsController::class, 'getNumberOfJudges']);
     Route::resource('events', EventsController::class, ['only' => ['index', 'show', 'store', 'update']]);
 
     Route::post('/squads/{squad}/member', [SquadsController::class, 'attachMemberToSquad']);
     Route::delete('/squads/{squad}/member/{member}', [SquadsController::class, 'detachMemberToSquad']);
     Route::resource('squads', SquadsController::class, ['only' => ['index', 'show', 'store', 'update']]);
 
-
     Route::resource('members', MemberController::class, ['only' => ['index', 'show', 'store', 'update']]);
     Route::resource('criterions', CriterionController::class, ['only' => ['index', 'show', 'store', 'update']]);
     Route::resource('criterias', CriteriaController::class, ['only' => ['index', 'show', 'store', 'update']]);
+
+    Route::post('/community-votes', [CommunityVotesController::class, 'store']);
+    Route::get('/community-votes/events/{events}/squads/{squads}', [CommunityVotesController::class, 'getEventSquadCommunityVotes']);
+
+    Route::post('/public-votes', [PublicVotesController::class, 'store']);
+    Route::get('/public-votes/events/{events}/squads/{squads}', [PublicVotesController::class, 'getEventSquadPublicVotes']);
+
 });
