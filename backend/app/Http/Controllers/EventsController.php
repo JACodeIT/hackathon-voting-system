@@ -16,6 +16,10 @@ use App\Http\Resources\EventsCollection;
 use Illuminate\Http\Request;
 use DB;
 
+
+use App\Http\Services\EventsService;
+use App\Http\Services\SquadsService;
+
 class EventsController extends Controller
 {
     /**
@@ -200,17 +204,9 @@ class EventsController extends Controller
         ],200);
     }
 
-
-
-    /**
-     * Formula:
-        *Individual Rating Per Judge = [∑(score/max_rating * weight)]
-        *
-        *(∑(Individual Rating Per Judge) / Number of judges) * judge_score_weight
-     */
-
-
-    public function recordEventJudgeSquadScores(Int $event_id, Int $judge_id, Int $squad_id, Request $request)
+    public function recordEventJudgeSquadScores(Int $event_id, Int $judge_id, Int $squad_id,
+                                                    Request $request,
+                                                    EventsService $eventService)
     {
         if(count($request->all()) == 0){
             return response()->json([
@@ -221,7 +217,7 @@ class EventsController extends Controller
 
         $insertedData = [];
         for($i = 0 ; $i < count($request->all()) ; $i++){
-            $rating = $this->getMinAndMaxScoreRating($event_id, $request[$i]['event_criteria_id']);
+            $rating = $eventService->getMinAndMaxScoreRating($event_id, $request[$i]['event_criteria_id']);
             $hasAlreadyScored = Judges_Scoreboard::where('event_judge', $judge_id)->where('squad_id', $squad_id)->where('event_criteria', $request[$i]['event_criteria_id'])->get();
 
             if($request[$i]['rating'] < $rating->min_rating || $request[$i]['rating'] > $rating->max_rating){
@@ -257,274 +253,94 @@ class EventsController extends Controller
         ],201);
     }
 
-    private function getMinAndMaxScoreRating(Int $event_id, Int $event_criteria_id)
-    {
-        return DB::table('event_criterias')
-                        ->join('criterias', 'event_criterias.criteria_id', '=', 'criterias.id')
-                        ->join('criterions','criterions.id', '=', 'criterias.criterion_id')
-                        ->where('event_criterias.event_id', $event_id)
-                        ->where('event_criterias.criteria_id', $event_criteria_id)
-                        ->first();
-    }
 
-    public function calculateJudgeScore(Int $event_id, Int $judge_id, Int $squad_id, Request $request)
+
+    public function calculateJudgeScore(Int $event_id, Int $judge_id, Int $squad_id,
+                                            Request $request,
+                                            EventsService $eventService,
+                                            SquadsService $squadService)
     {
-        $percentage_value = $this->getJudgeRawScoreRatingBasedOnWeight($event_id, $judge_id, $squad_id);
-        $getRawScore = $this->getRawScoreRating($event_id, $judge_id, $squad_id)->score;
-        $getMaxScore = $this->getMaxScoreRating($event_id, $judge_id, $squad_id)->score;
+        $percentage_value = $eventService->getJudgeRawScoreRatingBasedOnWeight($event_id, $judge_id, $squad_id);
+        $getRawScore = $eventService->getRawScoreRating($event_id, $judge_id, $squad_id)->score;
+        $getMaxScore = $eventService->getMaxScoreRating($event_id, $judge_id, $squad_id)->score;
 
         return response()->json([
-            'message' => 'Results for '.$this->getSquadName($squad_id),
+            'message' => 'Results for '.$squadService->getSquadName($squad_id),
             'data'  => [
-                'judge' => $this->getJudgeName($judge_id),
+                'judge' => $eventService->getJudgeName($judge_id),
                 'raw_score' => $getRawScore.'/'.$getMaxScore,
                 'percentage_value' => $percentage_value[count($percentage_value)-1]['percentage_value'] .'%',
-                'rating' => $this->getDataFromJudgesScoreboard($event_id, $judge_id, $squad_id, ['crio.criterion', 'js.score']),
+                'rating' => $eventService->getDataFromJudgesScoreboard($event_id, $judge_id, $squad_id, ['crio.criterion', 'js.score']),
             ],
         ]);
     }
 
-    public function getTotalScoreFromJudges(Int $event_id, Int $squad_id, Request $request)
+    public function getTotalScoreFromJudges(Int $event_id, Int $squad_id,
+                                            Request $request,
+                                            SquadsService $squadService,
+                                            EventsService $eventService)
     {
-        if($this->checkIfAllJudgeHasAlreadyScored($event_id, $squad_id)){
+        if($eventService->checkIfAllJudgeHasAlreadyScored($event_id, $squad_id)){
             return response()->json([
-                'message' => 'Results for '.$this->getSquadName($squad_id).' is not ready. Waiting for all judges to complete their votes.',
+                'message' => 'Results for '.$squadService->getSquadName($squad_id).' is not ready. Waiting for all judges to complete their votes.',
                 'data'  => [
-                    'squadName' => $this->getSquadName($squad_id),
-                    'squadLeader' => $this->getSquadLeaderName($squad_id),
-                    'judges' => $this->getJudgesListForEvent($event_id),
+                    'squadName' => $squadService->getSquadName($squad_id),
+                    'squadLeader' => $squadService->getSquadLeaderName($squad_id),
+                    'judges' => $eventService->getJudgesListForEvent($event_id),
                 ],
             ]);
         }
 
         return response()->json([
-            'message' => 'Results for '.$this->getSquadName($squad_id),
+            'message' => 'Results for '.$squadService->getSquadName($squad_id),
             'data'  => [
-                'squadName' => $this->getSquadName($squad_id),
-                'squadLeader' => $this->getSquadLeaderName($squad_id),
-                'percentageValue' => $this->getRawScoreRatingBasedOnWeight($event_id, $squad_id),
-                'weightPercentageValue' => ($this->getRawScoreRatingBasedOnWeight($event_id, $squad_id) / 100 ) * Events::find($event_id)->judge_vote_percentage,
-                'judges' => $this->getJudgesListForEvent($event_id),
+                'squadName' => $squadService->getSquadName($squad_id),
+                'squadLeader' => $squadService->getSquadLeaderName($squad_id),
+                'percentageValue' => $eventService->getRawScoreRatingBasedOnWeight($event_id, $squad_id),
+                'weightPercentageValue' => ($eventService->getRawScoreRatingBasedOnWeight($event_id, $squad_id) / 100 ) * Events::find($event_id)->judge_vote_percentage,
+                'judges' => $eventService->getJudgesListForEvent($event_id),
             ],
         ]);
     }
 
-    private function checkIfAllJudgeHasAlreadyScored(Int $event_id, Int $squad_id)
+
+
+    public function getFinalScoresFromJudgesAndCommunity(Int $event_id, Int $squad_id,
+                                                            Request $request,
+                                                            EventsService $eventService,
+                                                            SquadsService $squadService)
     {
-        return $this->countScoredJudges($event_id, $squad_id)->eventJudge === $this->countScoredJudges($event_id, $squad_id)->eventJudge;
-    }
+        $total = $eventService->applyJudgeScoreWeight($event_id, $squad_id) +
+                    $eventService->getCommunityVotesPercentage($squad_id, $event_id) +
+                    $eventService->getPublicVotesPercentage($squad_id, $event_id);
 
-    private function countScoredJudges(Int $event_id, Int $squad_id)
-    {
-
-        return  DB::table('judges_scoreboards as judges_scoreboards')
-                    ->join('event_criterias','event_criterias.id', '=', 'judges_scoreboards.event_criteria')
-                    ->where('event_criterias.event_id', $event_id)
-                    ->where('judges_scoreboards.squad_id',$squad_id)
-                    ->select(DB::raw('COUNT(DISTINCT judges_scoreboards.event_judge) as eventJudge'))
-                    ->first();
-    }
-
-    public function getFinalScoresFromJudgesAndCommunity(Int $event_id, Int $squad_id, Request $request)
-    {
-        $total = $this->applyJudgeScoreWeight($event_id, $squad_id) +
-                    $this->getCommunityVotesPercentage($squad_id, $event_id) +
-                    $this->getPublicVotesPercentage($squad_id, $event_id);
-
-        if($this->checkIfAllJudgeHasAlreadyScored($event_id, $squad_id)){
+        if($eventService->checkIfAllJudgeHasAlreadyScored($event_id, $squad_id)){
             return response()->json([
-                'message' => 'Results for '.$this->getSquadName($squad_id).' is not ready. Waiting for all judges to complete their votes.',
+                'message' => 'Results for '.$squadService->getSquadName($squad_id).' is not ready. Waiting for all judges to complete their votes.',
                 'data'  => [
-                    'squadName' => $this->getSquadName($squad_id),
-                    'squadLeader' => $this->getSquadLeaderName($squad_id),
-                    'judges' => $this->getJudgesListForEvent($event_id),
+                    'squadName' => $squadService->getSquadName($squad_id),
+                    'squadLeader' => $squadService->getSquadLeaderName($squad_id),
+                    'judges' => $eventService->getJudgesListForEvent($event_id),
                 ],
             ]);
         }
         return response()->json([
-            'message' => 'Results for '.$this->getSquadName($squad_id),
+            'message' => 'Results for '.$squadService->getSquadName($squad_id),
             'data'  => [
-                'squadName' => $this->getSquadName($squad_id),
-                'squadLeader' => $this->getSquadLeaderName($squad_id),
-                'judgeScore' => $this->applyJudgeScoreWeight($event_id, $squad_id).'%',
-                'communityVotes' => $this->getCommunityVotesPercentage($squad_id, $event_id).'%',
-                'publicVotes' => $this->getPublicVotesPercentage($squad_id, $event_id).'%',
+                'squadName' => $squadService->getSquadName($squad_id),
+                'squadLeader' => $squadService->getSquadLeaderName($squad_id),
+                'judgeScore' => $eventService->applyJudgeScoreWeight($event_id, $squad_id).'%',
+                'communityVotes' => $eventService->getCommunityVotesPercentage($squad_id, $event_id).'%',
+                'publicVotes' => $eventService->getPublicVotesPercentage($squad_id, $event_id).'%',
                 'total' => bcdiv($total, 1, 4).'%',
-                'judges' => $this->getJudgesListForEvent($event_id),
+                'judges' => $eventService->getJudgesListForEvent($event_id),
             ],
         ]);
     }
 
-    private function getSquadName(Int $squad_id){
-        return Squads::find($squad_id)->name;
-    }
-
-    private function getSquadLeaderName(Int $squad_id){
-        return Squads::find($squad_id)->leader->first_name. ' ' .Squads::find($squad_id)->leader->last_name;
-    }
-
-    private function getJudgeName(Int $judge_id){
-       return DB::table('judges_scoreboards as js')
-                    ->join('event_judges as ej','ej.id', '=', 'js.event_judge')
-                    ->join('members as m','m.id', '=', 'ej.member_id')
-                    ->where('js.event_judge', $judge_id)
-                    ->select(DB::raw('CONCAT(m.first_name, " ", m.last_name) as name'))
-                    ->first();
-    }
-
-    private function getDataFromJudgesScoreboard(Int $event_id, Int $judge_id, Int $squad_id, array $selectData)
-    {
-        return DB::table('judges_scoreboards as js')
-                    ->join('event_criterias as ec', 'ec.id', '=', 'js.event_criteria')
-                    ->join('criterias as cria','cria.id', '=', 'js.event_criteria')
-                    ->join('criterions as crio', 'crio.id', '=', 'cria.criterion_id')
-                    ->where('js.event_judge', $judge_id)
-                    ->where('js.squad_id', $squad_id)
-                    ->where('ec.event_id', $event_id)
-                    ->select($selectData)
-                    ->get();
-    }
-
-    private function getMaxScoreRating(Int $event_id, Int $judge_id)
-    {
-        return DB::table('judges_scoreboards as js')
-                    ->join('event_criterias as ec', 'ec.id', '=', 'js.event_criteria')
-                    ->join('criterias as cria','cria.id', '=', 'js.event_criteria')
-                    ->where('ec.event_id', $event_id)
-                    ->where('js.event_judge', $judge_id)
-                    ->select((DB::raw('SUM(cria.max_rating) as score')))
-                    ->first();
-    }
-
-    private function getRawScoreRating(Int $event_id, Int $judge_id, Int $squad_id)
-    {
-        return DB::table('judges_scoreboards as js')
-                    ->join('event_criterias as ec', 'ec.id', '=', 'js.event_criteria')
-                    ->join('criterias as cria','cria.id', '=', 'js.event_criteria')
-                    ->where('js.event_judge', $judge_id)
-                    ->where('js.squad_id', $squad_id)
-                    ->where('ec.event_id', $event_id)
-                    ->select((DB::raw('SUM(js.score) as score')))
-                    ->first();
-    }
-
-    private function getJudgeRawScoreRatingBasedOnWeight(Int $event_id, Int $judge_id, Int $squad_id)
-    {
-        $data = DB::table('judges_scoreboards as js')
-                    ->join('event_criterias as ec', 'ec.id', '=', 'js.event_criteria')
-                    ->join('criterias as cria','cria.id', '=', 'js.event_criteria')
-                    ->join('criterions as crio', 'crio.id', '=', 'cria.criterion_id')
-                    ->join('event_judges as ej','ej.id', '=', 'js.event_judge')
-                    ->where('js.event_judge', $judge_id)
-                    ->where('js.squad_id', $squad_id)
-                    ->where('ec.event_id', $event_id)
-                    ->select('crio.criterion','cria.percentage_value','cria.min_rating','cria.max_rating','js.score')
-                    ->get();
-
-        $collection = [];
-        for($i = 0; $i < count($data); $i++){
-            $detailed = [
-                'criterion' => $data[$i]->criterion,
-                'rawScore' => $data[$i]->score/$data[$i]->max_rating * $data[$i]->percentage_value,
-            ];
-            array_push($collection, $detailed);
-        };
-
-        $percentage_value = 0;
-        for($j = 0; $j < count($collection); $j++){
-            $percentage_value += $collection[$j]['rawScore'];
-        }
-
-        array_push($collection,['percentage_value' => $percentage_value]);
-        return $collection;
-    }
-
-    private function getRawScoreRatingBasedOnWeight(Int $event_id, Int $squad_id)
-    {
-        $data = DB::table('judges_scoreboards as js')
-                    ->join('event_criterias as ec', 'ec.id', '=', 'js.event_criteria')
-                    ->join('criterias as cria','cria.id', '=', 'js.event_criteria')
-                    ->join('criterions as crio', 'crio.id', '=', 'cria.criterion_id')
-                    ->join('members as m', 'm.id', '=', 'js.event_judge')
-                    ->join('squads as s', 's.id', '=', 'js.squad_id')
-                    ->where('js.squad_id', $squad_id)
-                    ->where('ec.event_id', $event_id)
-                    ->select('crio.criterion','cria.percentage_value','cria.min_rating','cria.max_rating','js.score', 's.name as squadName',DB::raw('CONCAT(m.first_name, " ", m.last_name) as judge'))
-                    ->get();
-
-        $collection = [];
-        for($i = 0; $i < count($data); $i++){
-            $detailed = [
-                'squad' => $data[$i]->squadName,
-                'judge' => $data[$i]->judge,
-                'criterion' => $data[$i]->criterion,
-                'rawScore' => $data[$i]->score/$data[$i]->max_rating * $data[$i]->percentage_value
-            ];
-            array_push($collection, $detailed);
-        };
-
-        $percentage_value = 0;
-        for($j = 0; $j < count($collection); $j++){
-            $percentage_value += $collection[$j]['rawScore'];
-        }
-
-        return $percentage_value/$this->getNumberOfJudges($event_id)->eventJudge;
-    }
-
-    private function applyJudgeScoreWeight(Int $event_id, Int $squad_id){
-        $percentage_value = $this->getRawScoreRatingBasedOnWeight($event_id, $squad_id);
-
-        return ($percentage_value /100) * Events::find($event_id)->judge_vote_percentage;
-    }
-
-    public function getNumberOfJudges(Int $event_id)
-    {
-        return DB::table('event_judges as event_judges')
-                    ->where('event_judges.event_id', $event_id)
-                    ->select(DB::raw('COUNT(DISTINCT event_judges.member_id) as eventJudge'))
-                    ->first();
-    }
-
-    private function getJudgesListForEvent(Int $event_id)
-    {
-        return DB::table('event_judges as ej')
-                ->join('members as m','m.id', '=', 'ej.member_id')
-                ->select(DB::raw('CONCAT(m.first_name, " ", m.last_name) as name'), 'm.discord_username as discordUsername')
-                ->get();
-    }
-
-
-    public function getCommunityVotesPercentage(Int $squad_id, Int $event_id)
-    {
-        $totalVoters = $this->getTotalVoters($event_id);
-        $communityVotes = $this->getCommunityVotes($event_id,$squad_id);
-
-        if($totalVoters->total == 0){
-            return 0;
-        }
-        return ($communityVotes->votesReceived / $totalVoters->total) * Events::find($event_id)->member_vote_percentage;
-    }
-
-    private function getTotalVoters(Int $event_id)
-    {
-        return DB::table('community_votes')
-                    ->select(DB::raw('COUNT(DISTINCT member_id) as total'))
-                    ->where('event_id', $event_id)
-                    ->first();
-    }
-
-    private function getCommunityVotes(Int $event_id, Int $squad_id)
-    {
-        return DB::table('community_votes')
-                    ->select(DB::raw('COUNT(DISTINCT member_id) as votesReceived'))
-                    ->where('event_id', $event_id)
-                    ->where('squad_id', $squad_id)
-                    ->first();
-    }
-
-    public function getEventSquadPublicVotes(Int $squad_id, Int $event_id){
-        $totalVoters = $this->getTotalPublicVoters($event_id);
-        $communityVotes = $this->getPublicVotes($event_id,$squad_id);
+    public function getEventSquadPublicVotes(Int $squad_id, Int $event_id, EventsService $eventService){
+        $totalVoters = $eventService->getTotalPublicVoters($event_id);
+        $communityVotes = $eventService->getPublicVotes($event_id,$squad_id);
 
         if($totalVoters->total == 0){
             return response()->json([
@@ -546,36 +362,7 @@ class EventsController extends Controller
         ],200);
     }
 
-    public function getPublicVotesPercentage(Int $squad_id, Int $event_id)
-    {
-        $totalVoters = $this->getTotalPublicVoters($event_id);
-        $communityVotes = $this->getPublicVotes($event_id,$squad_id);
-
-        if($totalVoters->total == 0){
-            return 0;
-        }
-        $percentage_value = ($communityVotes->votesReceived / $totalVoters->total) * Events::find($event_id)->public_vote_percentage;
-        return $percentage_value;
-    }
-
-    private function getTotalPublicVoters(Int $event_id)
-    {
-        return DB::table('public_votes')
-                    ->select(DB::raw('COUNT(DISTINCT email) as total'))
-                    ->where('event_id', $event_id)
-                    ->first();
-    }
-
-    private function getPublicVotes(Int $event_id, Int $squad_id)
-    {
-        return DB::table('public_votes')
-                    ->select(DB::raw('COUNT(DISTINCT email) as votesReceived'))
-                    ->where('event_id', $event_id)
-                    ->where('squad_id', $squad_id)
-                    ->first();
-    }
-
-    public function getAllFinalScoresFromJudgesAndCommunity(Int $event_id,  Request $request)
+    public function getAllFinalScoresFromJudgesAndCommunity(Int $event_id,  Request $request, EventsService $eventService)
     {
         $eventSquads = DB::table('events')
                     ->join('event_squads','event_squads.event_id', '=', 'events.id')
@@ -587,15 +374,15 @@ class EventsController extends Controller
         $returnValue = [];
 
         for($i=0 ; $i < count($eventSquads) ; $i++){
-            $total = $this->applyJudgeScoreWeight($event_id, $eventSquads[$i]->squad_id) +
-                     $this->getCommunityVotesPercentage($eventSquads[$i]->squad_id, $event_id) +
-                     $this->getPublicVotesPercentage($eventSquads[$i]->squad_id, $event_id);
+            $total = $eventService->applyJudgeScoreWeight($event_id, $eventSquads[$i]->squad_id) +
+                     $eventService->getCommunityVotesPercentage($eventSquads[$i]->squad_id, $event_id) +
+                     $eventService->getPublicVotesPercentage($eventSquads[$i]->squad_id, $event_id);
             $handler = [
                 'squadName' => $eventSquads[$i]->squadName,
                 'squadLeader' => $eventSquads[$i]->leaderName,
-                'judgeScore' => $this->applyJudgeScoreWeight($event_id, $eventSquads[$i]->squad_id).'%',
-                'communityVotes' => $this->getCommunityVotesPercentage($eventSquads[$i]->squad_id, $event_id).'%',
-                'publicVotes' => $this->getPublicVotesPercentage($eventSquads[$i]->squad_id, $event_id).'%',
+                'judgeScore' => $eventService->applyJudgeScoreWeight($event_id, $eventSquads[$i]->squad_id).'%',
+                'communityVotes' => $eventService->getCommunityVotesPercentage($eventSquads[$i]->squad_id, $event_id).'%',
+                'publicVotes' => $eventService->getPublicVotesPercentage($eventSquads[$i]->squad_id, $event_id).'%',
                 'total' => bcdiv($total, 1, 4).'%'
             ];
 
