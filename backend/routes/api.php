@@ -13,6 +13,7 @@ use App\Http\Controllers\CriterionController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\CommunityVotesController;
 use App\Http\Controllers\PublicVotesController;
+use App\Http\Controllers\DiscordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,6 @@ Route::group([
     Route::delete('/events/{event}/criteria/{criteria}', [EventsController::class, 'removeCriteriaToEvent']);
     Route::post('/events/{event}/judges', [EventsController::class, 'addJudgeToEvent']);
     Route::delete('/events/{event}/judges/{judge}', [EventsController::class, 'removeJudgeToEvent']);
-    Route::get('/events/{event}/judges/{judges}/squads/{squads}/scores', [EventsController::class, 'getEventJudgeSquadScores']);
     Route::post('/events/{event}/judges/{judges}/squads/{squads}/scores', [EventsController::class, 'recordEventJudgeSquadScores']);
     Route::get('/events/{event}/judges/{judges}/squads/{squads}/getJudgeScore', [EventsController::class, 'calculateJudgeScore']);
     Route::get('/events/{event}/squads/{squads}/getTotalScoreFromJudges', [EventsController::class, 'getTotalScoreFromJudges']);
@@ -72,5 +72,12 @@ Route::group([
 
     Route::post('/public-votes', [PublicVotesController::class, 'store']);
     Route::get('/public-votes/events/{events}/squads/{squads}', [PublicVotesController::class, 'getEventSquadPublicVotes']);
+});
 
+
+Route::group([
+    'prefix' => 'discord'
+], function ($router) {
+    Route::get('/guild-members-list', [DiscordController::class, 'getGuildMembersList']);
+    Route::post('/verify-member', [DiscordController::class, 'verifyMember']);
 });
