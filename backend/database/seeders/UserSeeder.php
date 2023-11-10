@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'username'=>'daedalus_admin',
             'email'=>'admin@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'ADMIN',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
             'username'=>'Timelord',
             'email'=>'mjrolex@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'ORGANIZER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
             'username'=>'directormac',
             'email'=>'artifex@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'JUDGE',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -49,6 +52,7 @@ class UserSeeder extends Seeder
             'username'=>'erikachenchan',
             'email'=>'erikachenchan@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD LEADER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -58,6 +62,7 @@ class UserSeeder extends Seeder
             'username'=>'akini',
             'email'=>'akini@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -67,6 +72,7 @@ class UserSeeder extends Seeder
             'username'=>'oshi',
             'email'=>'oshi@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -76,6 +82,7 @@ class UserSeeder extends Seeder
             'username'=>'krispi_donut',
             'email'=>'krispi_donut@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -85,6 +92,7 @@ class UserSeeder extends Seeder
             'username'=>'fluffybuddy',
             'email'=>'fluffybuddy@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -94,6 +102,7 @@ class UserSeeder extends Seeder
             'username'=>'andite',
             'email'=>'andite@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD LEADER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -103,6 +112,7 @@ class UserSeeder extends Seeder
             'username'=>'toney010319',
             'email'=>'toney010319@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -112,6 +122,7 @@ class UserSeeder extends Seeder
             'username'=>'BadPapi',
             'email'=>'BadPapi@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -121,6 +132,7 @@ class UserSeeder extends Seeder
             'username'=>'hotdog',
             'email'=>'hotdog@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -130,6 +142,7 @@ class UserSeeder extends Seeder
             'username'=>'angrytalong',
             'email'=>'angrytalong@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -139,6 +152,7 @@ class UserSeeder extends Seeder
             'username'=>'DDuran19',
             'email'=>'DDuran19@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD LEADER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -148,6 +162,7 @@ class UserSeeder extends Seeder
             'username'=>'denver',
             'email'=>'denver@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -157,6 +172,7 @@ class UserSeeder extends Seeder
             'username'=>'matchu',
             'email'=>'matchu@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -166,6 +182,7 @@ class UserSeeder extends Seeder
             'username'=>'luffy',
             'email'=>'luffy@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -175,6 +192,7 @@ class UserSeeder extends Seeder
             'username'=>'benar',
             'email'=>'benar@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -184,6 +202,7 @@ class UserSeeder extends Seeder
             'username'=>'jellyfish',
             'email'=>'jellyfish@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD LEADER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -193,6 +212,7 @@ class UserSeeder extends Seeder
             'username'=>'getgian',
             'email'=>'getgian@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -202,6 +222,7 @@ class UserSeeder extends Seeder
             'username'=>'thermo_ecs',
             'email'=>'thermo_ecs@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -211,6 +232,7 @@ class UserSeeder extends Seeder
             'username'=>'asbel',
             'email'=>'asbel@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -220,6 +242,7 @@ class UserSeeder extends Seeder
             'username'=>'dev.enigma',
             'email'=>'dev.enigma@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -229,6 +252,7 @@ class UserSeeder extends Seeder
             'username'=>'daydreamer',
             'email'=>'daydreamer@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -238,6 +262,7 @@ class UserSeeder extends Seeder
             'username'=>'delulu',
             'email'=>'delulu@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD LEADER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -247,6 +272,7 @@ class UserSeeder extends Seeder
             'username'=>'boybee',
             'email'=>'boybee@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -256,6 +282,7 @@ class UserSeeder extends Seeder
             'username'=>'macangel23',
             'email'=>'macangel23@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
@@ -265,6 +292,7 @@ class UserSeeder extends Seeder
             'username'=>'annie',
             'email'=>'annie@daedalus.codes',
             'password'=> Hash::make('Password@@123'),
+            'roles' => 'SQUAD MEMBER',
             'remember_token'=> Str::random(10),
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
