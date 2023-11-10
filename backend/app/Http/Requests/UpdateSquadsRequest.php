@@ -27,7 +27,7 @@ class UpdateSquadsRequest extends FormRequest
     {
         $squad = $this->route('squad');
         return [
-            'leader_id' => 'required|integer',
+            'leader_id' => 'sometimes|integer',
             'name'      => 'sometimes|string|unique:squads,name,'.$squad
         ];
     }
