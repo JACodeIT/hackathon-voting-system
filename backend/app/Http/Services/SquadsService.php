@@ -16,4 +16,12 @@ class SquadsService
         return Squads::find($squad_id)->leader->first_name. ' ' .Squads::find($squad_id)->leader->last_name;
     }
 
+    public function getEventSquads(Int $event_id)
+    {
+        return DB::table('event_squads')
+                        ->join('squads', 'event_squads.squad_id', '=', 'squads.id')
+                        ->where('event_squads.event_id', $event_id)
+                        ->select('squads.id as squad_id', 'squads.name as squad_name')
+                        ->get();
+    }
 }
