@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId('brgy_address')->nullable()->constrained('ref_barangay');
             $table->longText('complete_address')->nullable();
             $table->string('status',50);
-            $table->longText('banner_url');
+            $table->string('banner_url',4000);
             $table->boolean('isGroup')->default(false);
             $table->tinyInteger('number_of_members')->default(1);
             $table->boolean('public_can_vote')->default(false);
