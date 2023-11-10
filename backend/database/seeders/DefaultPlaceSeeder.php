@@ -17,7 +17,7 @@ class DefaultPlaceSeeder extends Seeder
         $this->command->getOutput()->progressAdvance();
         $this->call([ProvinceSeeder::class]);
         $this->command->getOutput()->progressAdvance();
-        $this->call([CitymunSeeder::class]);
+        $this->call([CityMunSeeder::class]);
         $this->command->getOutput()->progressAdvance();
         $this->call([R1BrgySeeder::class]);
         $this->command->getOutput()->progressAdvance();
