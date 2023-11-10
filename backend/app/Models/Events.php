@@ -81,4 +81,9 @@ class Events extends Model
     {
         return $this->belongsToMany(Criteria::class, 'event_criterias', 'event_id', 'criteria_id');
     }
+
+    public function squads()
+    {
+        return $this->belongsToMany(Squads::class, 'event_squads', 'event_id', 'squad_id');
+    }
 }

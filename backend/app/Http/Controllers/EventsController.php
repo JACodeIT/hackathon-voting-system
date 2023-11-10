@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Events;
 use App\Models\Event_Criteria;
 use App\Models\Event_Judges;
+use App\Models\Event_Squads;
 use App\Models\Member;
 use App\Models\Criteria;
 use App\Models\Criterion;
@@ -24,9 +25,9 @@ class EventsController extends Controller
     public function index(Request $request)
     {
         return new EventsCollection(count($request->all()) > 0 ?
-                Events::with('organizer.account', 'judges.account', 'criteria.criterion')->where('status', $request->status)->get() :
-                Events::with('organizer.account', 'judges.account', 'criteria.criterion')->get());
-    }
+                Events::with('organizer.account', 'judges.account', 'criteria.criterion','squads')->where('status', $request->status)->get() :
+                Events::with('organizer.account', 'judges.account', 'criteria.criterion','squads')->get());
+}
 
     /**
      * Store a newly created resource in storage.
@@ -69,7 +70,7 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Int $id)
+    public function show(Int $id, SquadsService $squadService)
     {
         if(is_null(Events::find($id))){
             return response()->json([
@@ -78,9 +79,14 @@ class EventsController extends Controller
             ]);
         }
 
-        return  new EventsCollection(Events::with('organizer', 'judges.account', 'criteria.criterion')
-            ->where('id', $id)
-            ->get());
+        return response()->json([
+            'success'   => true,
+            'data'      => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                                ->where('id', $id)
+                                ->get(),
+            'number_of_squads' => Event_Squads::where('event_id', $id)->count(),
+            'squads'    => $squadService->getEventSquads($id),
+        ],200);
     }
 
     /**
