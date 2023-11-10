@@ -957,7 +957,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_gateway}}/api/squads",
+							"raw": "{{api_gateway}}api/squads",
 							"host": [
 								"{{api_gateway}}"
 							],
@@ -1463,19 +1463,19 @@
 											"type": "text"
 										},
 										{
-											"key": "member_id",
-											"value": "1",
+											"key": "email",
+											"value": "fluffybuddy@daedalus.codes",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{api_gateway}}api/community-votes",
+									"raw": "{{api_gateway}}api/public-votes",
 									"host": [
 										"{{api_gateway}}api"
 									],
 									"path": [
-										"community-votes"
+										"public-votes"
 									]
 								}
 							},
@@ -1607,21 +1607,52 @@
 					"response": []
 				},
 				{
-					"name": "Final Score of All Squads who participated in the Event",
+					"name": "Display Score of All Squads who participated in the Event",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{api_gateway}}api/events/1/squads/1/getFinalScore",
+							"raw": "{{api_gateway}}api/events/1/getEventsFinalScore",
 							"host": [
 								"{{api_gateway}}api"
 							],
 							"path": [
 								"events",
 								"1",
-								"squads",
-								"1",
-								"getFinalScore"
+								"getEventsFinalScore"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discord",
+			"item": [
+				{
+					"name": "Verify if member of community",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "discord_username",
+									"value": "jacodeit.dev",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/discord/verify-member",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"discord",
+								"verify-member"
 							]
 						}
 					},
