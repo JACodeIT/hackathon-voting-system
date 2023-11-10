@@ -1,0 +1,12 @@
+spec:
+  name: hackVote
+  services:
+  - environment_slug: php
+    git:
+      branch: master
+      repo_clone_url: https://github.com/JACodeIT/hackathon-voting-system.git
+    envs:
+    - key: APP_KEY
+      value: base64:oJdVWD9Wap8kfqsbD//BTklM7nesXL+w0w/pOa0bIGo=
+    name: hackVote
+    run_command: heroku-php-apache2 public/
