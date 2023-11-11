@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use DB;
 use App\Models\Events;
+use App\Models\Event_Squads;
 
 class EventsService
 {
@@ -220,5 +221,23 @@ class EventsService
         }
         $percentage_value = ($communityVotes->votesReceived / $totalVoters->total) * Events::find($event_id)->public_vote_percentage;
         return $percentage_value;
+    }
+
+    public function validateIfTieIsPresent(Int $event_id){
+        $squads =  Event_Squads::where('event_id', $event_id)->get();
+        $scoreHandler = [];
+        for($i=0;$i < count($squads); $i++){
+                $total = $this->applyJudgeScoreWeight($event_id, $squads[$i]->squad_id) +
+                         $this->getCommunityVotesPercentage($squads[$i]->squad_id, $event_id) +
+                         $this->getPublicVotesPercentage($squads[$i]->squad_id, $event_id);
+                $scoreHandler[] = $total;
+        }
+
+        if(count(array_unique($scoreHandler)) === count($scoreHandler))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

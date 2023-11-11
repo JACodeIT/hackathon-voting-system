@@ -466,4 +466,46 @@ class EventsController extends Controller
             'data'  => $criteria
         ],200);
     }
+
+    public function forceDeclareWinner(Int $event_id, Request $request, EventsService $eventService)
+    {
+        if($eventService->validateIfTieIsPresent($event_id))
+        {
+            return response()->json([
+                'message' => 'No tie detected. Force declare winner will not proceed.'
+            ],200);
+        }
+
+
+        $total = $eventService->applyJudgeScoreWeight($event_id, $request->squad_id) +
+                 $eventService->getCommunityVotesPercentage($request->squad_id, $event_id) +
+                 $eventService->getPublicVotesPercentage($request->squad_id, $event_id);
+
+
+        $winner = Winners::updateOrCreate(['event_id' => $event_id],
+            [
+                'squad_id'  => $request->squad_id,
+                'rank'      => 1,
+                'rating'    => $total
+            ]);
+
+        $squadLeader = DB::table('squads')
+                            ->join('members','members.id', '=', 'squads.leader_id')
+                            ->select(DB::raw('CONCAT(members.first_name, " ", members.last_name) as squadLeader'))
+                            ->where('squads.id', $request->squad_id)
+                            ->first();
+        return response()->json([
+            'success'   => true,
+            'confirmation-message' => 'Tie detected.',
+            'message' => 'Winner for '.Events::find($event_id)->topic,
+            'data'  => [
+                'eventWinner' => [
+                    'squadName' => Squads::find($request->squad_id)->name,
+                    'squadLeader' => $squadLeader->squadLeader,
+                    'rank' => 1,
+                    'total' => $total
+                ],
+            ]
+        ],200);
+    }
 }
