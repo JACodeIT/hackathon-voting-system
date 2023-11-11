@@ -18,7 +18,7 @@ class CriteriaSeeder extends Seeder
             'criterion_id'=>'1',
             'min_rating'=>'1.00',
             'max_rating'=>'5.00',
-            'max_rating'=>'20',
+            'percentage_value'=>'20',
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -26,7 +26,7 @@ class CriteriaSeeder extends Seeder
             'criterion_id'=>'2',
             'min_rating'=>'1.00',
             'max_rating'=>'5.00',
-            'max_rating'=>'20',
+            'percentage_value'=>'20',
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -34,7 +34,7 @@ class CriteriaSeeder extends Seeder
             'criterion_id'=>'3',
             'min_rating'=>'1.00',
             'max_rating'=>'5.00',
-            'max_rating'=>'20',
+            'percentage_value'=>'20',
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -42,7 +42,7 @@ class CriteriaSeeder extends Seeder
             'criterion_id'=>'4',
             'min_rating'=>'1.00',
             'max_rating'=>'5.00',
-            'max_rating'=>'20',
+            'percentage_value'=>'20',
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -50,7 +50,7 @@ class CriteriaSeeder extends Seeder
             'criterion_id'=>'5',
             'min_rating'=>'1.00',
             'max_rating'=>'5.00',
-            'max_rating'=>'20',
+            'percentage_value'=>'20',
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
