@@ -14,5 +14,10 @@ class Criterion extends Model
     protected $fillable = [
         'criterion',
         'description',
+        'guidelines'
+    ];
+
+    protected $casts = [
+        'guidelines' => 'array'
     ];
 }

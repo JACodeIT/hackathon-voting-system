@@ -35,6 +35,7 @@ class CriterionController extends Controller
         $criterion = Criterion::create([
             'criterion' => $request->criterion,
             'description' => $request->description,
+            'guidelines' => $request->guidelines
         ]);
 
         return response()->json([
