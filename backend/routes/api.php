@@ -14,6 +14,7 @@ use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\CommunityVotesController;
 use App\Http\Controllers\PublicVotesController;
 use App\Http\Controllers\DiscordController;
+use App\Http\Controllers\EventParticipantsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,9 @@ Route::group([
     Route::get('/events/{event}/squads/{squads}/getFinalScore', [EventsController::class, 'getFinalScoresFromJudgesAndCommunity']);
     Route::get('/events/{event}/getEventsFinalScore', [EventsController::class, 'getAllFinalScoresFromJudgesAndCommunity']);
     Route::get('/events/{event}/countJudges', [EventsController::class, 'getNumberOfJudges']);
+
+    Route::post('/events/{event}/member/{member}/register', [EventParticipantsController::class, 'store']);
+    Route::delete('/events/{event}/member/{member}/cancel-registration', [EventParticipantsController::class, 'destroy']);
     Route::resource('events', EventsController::class, ['only' => ['index', 'show', 'store', 'update']]);
 
     Route::post('/squads/{squad}/member', [SquadsController::class, 'attachMemberToSquad']);
@@ -72,6 +76,8 @@ Route::group([
 
     Route::post('/public-votes', [PublicVotesController::class, 'store']);
     Route::get('/public-votes/events/{events}/squads/{squads}', [PublicVotesController::class, 'getEventSquadPublicVotes']);
+
+
 });
 
 
