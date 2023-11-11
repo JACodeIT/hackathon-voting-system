@@ -457,4 +457,13 @@ class EventsController extends Controller
     {
         return $eventService->getNumberOfJudges($event_id);
     }
+
+    public function getEventCriteria(Int $event_id, EventsService $eventService)
+    {
+        $criteria = Event_Criteria::with('criteria.criterion')->where('event_id', $event_id)->get();
+        return response()->json([
+            'message' => 'Criteria for '.Events::find($event_id)->topic,
+            'data'  => $criteria
+        ],200);
+    }
 }

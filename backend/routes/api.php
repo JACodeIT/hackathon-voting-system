@@ -60,7 +60,7 @@ Route::group([
     Route::get('/events/{event}/squads/{squads}/getFinalScore', [EventsController::class, 'getFinalScoresFromJudgesAndCommunity']);
     Route::get('/events/{event}/getEventsFinalScore', [EventsController::class, 'getAllFinalScoresFromJudgesAndCommunity']);
     Route::get('/events/{event}/countJudges', [EventsController::class, 'getNumberOfJudges']);
-
+    Route::get('/events/{event}/criteria', [EventsController::class, 'getEventCriteria']);
     Route::post('/events/{event}/member/{member}/register', [EventParticipantsController::class, 'store']);
     Route::delete('/events/{event}/member/{member}/cancel-registration', [EventParticipantsController::class, 'destroy']);
     Route::resource('events', EventsController::class, ['only' => ['index', 'show', 'store', 'update']]);

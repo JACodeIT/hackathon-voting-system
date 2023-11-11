@@ -22,8 +22,8 @@ class Event_Criteria extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function criteria(): HasMany
+    public function criteria()
     {
-        return $this->hasMany(Criteria::class, 'criteria_id', 'id');
+        return $this->hasMany(Criteria::class, 'id', 'criteria_id');
     }
 }
