@@ -19,6 +19,9 @@ class Member extends Model
         'name_extension',
         'github_account',
         'discord_username',
+        'be_rating',
+        'fe_rating',
+        'ui_ux_rating'
     ];
 
     /**
@@ -28,7 +31,7 @@ class Member extends Model
      */
     public function squads()
     {
-        return $this->belongsToMany(Squads::class, 'squad_members', 'member_id', 'squad_id');
+        return $this->belongsToMany(Squads::class, 'squad_members', 'member_id', 'id');
     }
 
     /**
@@ -40,5 +43,4 @@ class Member extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
-
 }
