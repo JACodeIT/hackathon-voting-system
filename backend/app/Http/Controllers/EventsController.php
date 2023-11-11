@@ -60,7 +60,8 @@ class EventsController extends Controller
             'public_numbers_of_vote'    => $request->public_numbers_of_vote,
             'judge_vote_percentage'     => $request->judge_vote_percentage,
             'member_vote_percentage'    => $request->member_vote_percentage,
-            'public_vote_percentage'    => $request->public_vote_percentage
+            'public_vote_percentage'    => $request->public_vote_percentage,
+            'maximum_registrants'       => $request->maximum_registrants
         ]);
 
         return response()->json([

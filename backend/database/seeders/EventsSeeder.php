@@ -37,6 +37,7 @@ class EventsSeeder extends Seeder
             'judge_vote_percentage' => '80',
             'member_vote_percentage' => '20',
             'public_vote_percentage' => '0',
+            'maximum_registrants' => 25,
             'created_at'    => Carbon::now('Asia/Manila'),
             'updated_at'    => Carbon::now('Asia/Manila')
         ]);

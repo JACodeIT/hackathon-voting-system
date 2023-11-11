@@ -42,11 +42,14 @@ class MemberController extends Controller
             'name_extension'         => $request->name_extension,
             'github_account'         => $request->github_account,
             'discord_username'       => $request->discord_username,
+            'be_rating'              => $request->be_rating,
+            'fe_rating'              => $request->fe_rating,
+            'ui_ux_rating'           => $request->ui_ux_rating
         ]);
 
         return response()->json([
             'message'   => $member->first_name.' ' . $member->last_name. ' has been registered.',
-            'data'      =>  Member::with('account')
+            'data'      =>  Member::with('squads','account','squads.events')
                             ->where('id', $member->id)
                             ->get()
         ],200);
@@ -63,7 +66,7 @@ class MemberController extends Controller
                 'message' => 'Member does not exist.'
             ]);
         }
-        return new MembersCollection(Member::with('squads','account')
+        return new MembersCollection(Member::with('squads','account','squads.events')
                                         ->where('id', $id)
                                         ->get());
     }

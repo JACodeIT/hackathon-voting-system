@@ -31,7 +31,10 @@ class StoreMemberRequest extends FormRequest
             'name_extension'         => 'nullable|string',
             'github_account'         => 'required|string',
             'discord_username'       => 'required|string',
-            'user_id'                => 'required|integer'
+            'user_id'                => 'required|integer',
+            'be_rating'              => 'required|integer|between:1,10',
+            'fe_rating'              => 'required|integer|between:1,10',
+            'ui_ux_rating'           => 'required|integer|between:1,10'
         ];
     }
 
@@ -48,6 +51,13 @@ class StoreMemberRequest extends FormRequest
             'github_account.required'         => 'Github account is required.',
             'discord_username.required'       => 'Discord username is required.',
             'user_id.required'                => 'User id is required.',
+            'be_rating.required'              => 'BE rating is required.',
+            'fe_rating.required'              => 'FE rating is required.',
+            'ui_ux_rating.required'           => 'UI/UX rating is required.',
+
+            'be_rating.between'              => 'BE rating must be between 1 and 10.',
+            'fe_rating.between'              => 'FE rating must be between 1 and 10.',
+            'ui_ux_rating.between'           => 'UI/UX rating must be between 1 and 10.',
         ];
     }
 

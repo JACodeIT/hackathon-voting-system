@@ -39,6 +39,7 @@ class Events extends Model
         'judge_vote_percentage',
         'member_vote_percentage',
         'public_vote_percentage',
+        'maximum_registrants',
     ];
 
     /**

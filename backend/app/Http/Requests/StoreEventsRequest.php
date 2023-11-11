@@ -46,6 +46,7 @@ class StoreEventsRequest extends FormRequest
             'judge_vote_percentage'     => 'required|integer',
             'member_vote_percentage'    => 'required|integer',
             'public_vote_percentage'    => 'required|integer',
+            'maximum_registrants'       => 'required|integer',
         ];
     }
 
@@ -75,6 +76,14 @@ class StoreEventsRequest extends FormRequest
             'judge_vote_percentage.required'    => 'Judge vote percentage is required.',
             'member_vote_percentage.required'   => 'Member vote percentage is required.',
             'public_vote_percentage.required'   => 'Public vote percentage is required.',
+            'maximum_registrants.required'      => 'Maximum number of registrants is required.',
+
+
+            'member_numbers_of_vote.integer'    => 'Maximum number of votes per member must be an integer.',
+            'public_numbers_of_vote.integer'    => 'Maximum number of votes per public must be an integer.',
+            'judge_vote_percentage.integer'     => 'Judge vote percentage must be an integer.',
+            'member_vote_percentage.integer'    => 'Member vote percentage must be an integer.',
+            'public_vote_percentage.integer'    => 'Public vote percentage must be an integer.',
 
             'start_date.date_format'            => 'Start date must be in YYYY-MM-DD format.',
             'end_date.date_format'              => 'End date must be in YYYY-MM-DD format.',

@@ -31,7 +31,10 @@ class UpdateMemberRequest extends FormRequest
             'name_extension'         => 'nullable|string',
             'github_account'         => 'sometimes|string',
             'discord_username'       => 'sometimes|string',
-            'user_id'                => 'sometimes|integer'
+            'user_id'                => 'sometimes|integer',
+            'be_rating'              => 'sometimes|integer|between:1,10',
+            'fe_rating'              => 'sometimes|integer|between:1,10',
+            'ui_ux_rating'           => 'sometimes|integer|between:1,10',
         ];
     }
 
@@ -48,6 +51,15 @@ class UpdateMemberRequest extends FormRequest
             'github_account.required'         => 'Github account is required.',
             'discord_username.required'       => 'Discord username is required.',
             'user_id.required'                => 'User id is required.',
+
+            'be_rating.integer'              => 'BE rating must be an integer.',
+            'fe_rating.integer'              => 'FE rating must be an integer.',
+            'ui_ux_rating.integer'           => 'UI/UX rating must be an integer.',
+
+            'be_rating.between'              => 'BE rating must be between 1 and 10.',
+            'fe_rating.between'              => 'FE rating must be between 1 and 10.',
+            'ui_ux_rating.between'           => 'UI/UX rating must be between 1 and 10.',
+
         ];
     }
 
