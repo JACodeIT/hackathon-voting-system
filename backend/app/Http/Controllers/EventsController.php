@@ -393,7 +393,7 @@ class EventsController extends Controller
                 'judgeScore' => $eventService->applyJudgeScoreWeight($event_id, $eventSquads[$i]->squad_id),
                 'communityVotes' => $eventService->getCommunityVotesPercentage($eventSquads[$i]->squad_id, $event_id),
                 'publicVotes' => $eventService->getPublicVotesPercentage($eventSquads[$i]->squad_id, $event_id),
-                'total' => bcdiv($total, 1, 2)
+                'total' => round($total)
             ];
             array_push($returnValue,$handler);
         }
