@@ -1053,6 +1053,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "FORCE DECLARE WINNER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "squad_id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/force-declare-winner",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"force-declare-winner"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
