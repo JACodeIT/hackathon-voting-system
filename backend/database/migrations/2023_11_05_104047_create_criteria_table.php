@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('criterions', function (Blueprint $table) {
             $table->id();
             $table->string('criterion', 100);
-            $table->longText('description');
+            $table->longText('description')->nullable();
+            $table->json('guidelines')->nullable();
             $table->timestamps();
         });
     }
