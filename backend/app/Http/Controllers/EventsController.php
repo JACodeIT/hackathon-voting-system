@@ -11,6 +11,7 @@ use App\Models\Criteria;
 use App\Models\Criterion;
 use App\Models\Squads;
 use App\Models\Judges_Scoreboard;
+use App\Models\Winners;
 use App\Http\Requests\StoreEventsRequest;
 use App\Http\Requests\UpdateEventsRequest;
 use App\Http\Resources\EventsCollection;
@@ -386,26 +387,69 @@ class EventsController extends Controller
                      $eventService->getCommunityVotesPercentage($eventSquads[$i]->squad_id, $event_id) +
                      $eventService->getPublicVotesPercentage($eventSquads[$i]->squad_id, $event_id);
             $handler = [
+                'squad_id'  => $eventSquads[$i]->squad_id,
                 'squadName' => $eventSquads[$i]->squadName,
                 'squadLeader' => $eventSquads[$i]->leaderName,
-                'judgeScore' => $eventService->applyJudgeScoreWeight($event_id, $eventSquads[$i]->squad_id).'%',
-                'communityVotes' => $eventService->getCommunityVotesPercentage($eventSquads[$i]->squad_id, $event_id).'%',
-                'publicVotes' => $eventService->getPublicVotesPercentage($eventSquads[$i]->squad_id, $event_id).'%',
-                'total' => bcdiv($total, 1, 4).'%'
+                'judgeScore' => $eventService->applyJudgeScoreWeight($event_id, $eventSquads[$i]->squad_id),
+                'communityVotes' => $eventService->getCommunityVotesPercentage($eventSquads[$i]->squad_id, $event_id),
+                'publicVotes' => $eventService->getPublicVotesPercentage($eventSquads[$i]->squad_id, $event_id),
+                'total' => bcdiv($total, 1, 2)
             ];
-
             array_push($returnValue,$handler);
         }
+        // return $returnValue[0]['total'];
+        usort($returnValue, function($a, $b) {
+            $result = 0;
+            if ($a['total'] < $b['total']) {
+                $result = 1;
+            } else if ($a['total'] > $b['total']) {
+                $result = -1;
+            }
+            return $result;
+        });
+
+        for($x=0; $x < count($returnValue); $x++){
+            $returnValue[$x]['rank'] = $x+1;
+        }
+
+        Winners::updateOrCreate(['event_id' => $event_id],
+            [
+                'squad_id'  => $returnValue[0]['squad_id'],
+                'rank'      => $returnValue[0]['rank'],
+                'rating'    => $returnValue[0]['total']
+            ]);
 
         return response()->json([
             'message' => 'Results for '. Events::find($event_id)->topic,
-            'eventDetails' => [
-                'eventTopic' => Events::find($event_id)->topic,
-                'Judge Score Percentage' => Events::find($event_id)->judge_vote_percentage,
-                'Community Score Percentage' => Events::find($event_id)->member_vote_percentage,
-                'Public Score Percentage' => Events::find($event_id)->public_vote_percentage,
-            ],
-            'rating'  => $returnValue,
+            'data'=>[
+                'eventDetails' => [
+                    'eventTopic' => Events::find($event_id)->topic,
+                    'Judge Score Percentage' => Events::find($event_id)->judge_vote_percentage,
+                    'Community Score Percentage' => Events::find($event_id)->member_vote_percentage,
+                    'Public Score Percentage' => Events::find($event_id)->public_vote_percentage,
+                ],
+                'eventWinner' => [
+                    'squadName' => $returnValue[0]['squadName'],
+                    'squadLeader' => $returnValue[0]['squadLeader'],
+                    'rank' => $returnValue[0]['rank'],
+                    'total' => $returnValue[0]['total']
+                ],
+                'rating'  => $returnValue,
+            ]
         ]);
+    }
+
+    public function getEventJudges(Int $event_id)
+    {
+        $judges = DB::table('event_judges')
+                    ->join('events','events.id', '=', 'event_judges.event_id')
+                    ->join('members','members.id', '=', 'event_judges.member_id')
+                    ->select('event_judges.id as judge_id', 'events.topic as eventTopic',DB::raw('CONCAT(members.first_name, " ", members.last_name) as name'))
+                    ->where('event_judges.event_id', $event_id)
+                    ->get();
+        return response()->json([
+            'message' => 'Judges for '.Events::find($event_id)->topic,
+            'data'  => $judges
+        ],200);
     }
 }

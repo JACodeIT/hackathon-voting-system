@@ -15,6 +15,7 @@ use App\Http\Controllers\CommunityVotesController;
 use App\Http\Controllers\PublicVotesController;
 use App\Http\Controllers\DiscordController;
 use App\Http\Controllers\EventParticipantsController;
+use App\Http\Controllers\WinnersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::group([
 ], function ($router) {
     Route::post('/events/{event}/criteria', [EventsController::class, 'addCriteriaToEvent']);
     Route::delete('/events/{event}/criteria/{criteria}', [EventsController::class, 'removeCriteriaToEvent']);
+    Route::get('/events/{event}/judges', [EventsController::class, 'getEventJudges']);
     Route::post('/events/{event}/judges', [EventsController::class, 'addJudgeToEvent']);
     Route::delete('/events/{event}/judges/{judge}', [EventsController::class, 'removeJudgeToEvent']);
     Route::post('/events/{event}/judges/{judges}/squads/{squads}/scores', [EventsController::class, 'recordEventJudgeSquadScores']);
@@ -77,6 +79,9 @@ Route::group([
     Route::post('/public-votes', [PublicVotesController::class, 'store']);
     Route::get('/public-votes/events/{events}/squads/{squads}', [PublicVotesController::class, 'getEventSquadPublicVotes']);
 
+    // Route::resource('winners', WinnersController::class, ['only' => ['index', 'show', 'store', 'update']]);
+
+    Route::get('/winners/events/{events}', [WinnersController::class, 'getWinnerByEventId']);
 
 });
 

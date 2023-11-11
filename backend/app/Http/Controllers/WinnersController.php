@@ -6,6 +6,8 @@ use App\Models\Winners;
 use App\Http\Requests\StoreWinnersRequest;
 use App\Http\Requests\UpdateWinnersRequest;
 
+use DB;
+
 class WinnersController extends Controller
 {
     /**
@@ -62,5 +64,20 @@ class WinnersController extends Controller
     public function destroy(Winners $winners)
     {
         //
+    }
+
+    public function getWinnerByEventId(Int $event_id)
+    {
+        $data = DB::table('winners')
+                ->join('squads', 'winners.squad_id', '=', 'squads.id')
+                ->join('members', 'members.id', '=', 'squads.leader_id')
+                ->join('events', 'events.id', '=', 'winners.event_id')
+                ->where('winners.event_id', $event_id)
+                ->select('squads.name as squadName', 'winners.rank','winners.rating', 'events.topic as eventTopic', DB::raw('CONCAT (members.first_name, " ", members.last_name) as squadLeader'))
+                ->get();
+        return response()->json([
+            'message'   => 'Winners retrieved successfully.',
+            'data'      => $data
+            ],200);
     }
 }
