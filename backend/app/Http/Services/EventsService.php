@@ -153,7 +153,7 @@ class EventsService
 
     public function checkIfAllJudgeHasAlreadyScored(Int $event_id, Int $squad_id)
     {
-        return $this->countScoredJudges($event_id, $squad_id)->eventJudge === $this->countScoredJudges($event_id, $squad_id)->eventJudge;
+        return $this->countScoredJudges($event_id, $squad_id)->eventJudge !== $this->getNumberOfJudges($event_id)->eventJudge;
     }
 
     public function countScoredJudges(Int $event_id, Int $squad_id)
