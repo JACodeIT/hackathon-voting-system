@@ -35,6 +35,7 @@ return new class extends Migration
             $table->tinyInteger('judge_vote_percentage')->default(100);
             $table->tinyInteger('member_vote_percentage')->default(0);
             $table->tinyInteger('public_vote_percentage')->default(0);
+            $table->integer('maximum_registrants')->default(25);
             $table->timestamps();
 
             $table->foreign('organizer_id')->references('id')->on('members');

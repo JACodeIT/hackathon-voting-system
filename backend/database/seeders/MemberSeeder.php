@@ -22,6 +22,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'daedalus.codes',
             'discord_username' => 'webdevdaedalus',
             'user_id' => 1,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -34,6 +37,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'mjrolex',
             'discord_username' => 'mjrolex',
             'user_id' => 2,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -46,6 +52,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'directormac',
             'discord_username' => 'directormac',
             'user_id' => 3,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -58,6 +67,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'erikachenchan',
             'discord_username' => 'erikachenchan',
             'user_id' => 4,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -70,6 +82,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'akini',
             'discord_username' => 'akini',
             'user_id' => 5,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -82,6 +97,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'oshi',
             'discord_username' => 'oshi',
             'user_id' => 6,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -94,6 +112,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'donutkrispi',
             'discord_username' => 'donutkrispi',
             'user_id' => 7,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -106,6 +127,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'fluffybuddy',
             'discord_username' => 'fluffybuddy',
             'user_id' => 8,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -118,6 +142,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'andite',
             'discord_username' => 'andite',
             'user_id' => 9,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -130,6 +157,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'toney',
             'discord_username' => 'toney',
             'user_id' => 10,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -142,6 +172,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'badpapi',
             'discord_username' => 'badpapi',
             'user_id' => 11,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -154,6 +187,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'hotdog',
             'discord_username' => 'hotdog',
             'user_id' => 12,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -166,6 +202,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'angrytalong',
             'discord_username' => 'angrytalong',
             'user_id' => 13,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -178,6 +217,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'DDuran',
             'discord_username' => 'DDuran',
             'user_id' => 14,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -190,6 +232,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'denver',
             'discord_username' => 'denver',
             'user_id' => 15,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -202,6 +247,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'matchu',
             'discord_username' => 'matchu',
             'user_id' => 16,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -214,6 +262,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'luffy',
             'discord_username' => 'luffy',
             'user_id' => 17,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -226,6 +277,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'benar',
             'discord_username' => 'benar',
             'user_id' => 18,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -238,6 +292,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'jellyfish',
             'discord_username' => 'jellyfish',
             'user_id' => 19,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -250,6 +307,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'getgian',
             'discord_username' => 'getgian',
             'user_id' => 20,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -262,6 +322,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'thermo_ecs',
             'discord_username' => 'thermo_ecs',
             'user_id' => 21,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -274,6 +337,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'asbel',
             'discord_username' => 'asbel',
             'user_id' => 22,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -286,6 +352,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'dev.enigma',
             'discord_username' => 'dev.enigma',
             'user_id' => 23,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -298,6 +367,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'daydreamer',
             'discord_username' => 'daydreamer',
             'user_id' => 24,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -310,6 +382,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'delulu',
             'discord_username' => 'deluu',
             'user_id' => 25,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -322,6 +397,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'boybee',
             'discord_username' => 'boybee',
             'user_id' => 26,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -334,6 +412,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'macangel23',
             'discord_username' => 'macangel23',
             'user_id' => 27,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);
@@ -346,6 +427,9 @@ class MemberSeeder extends Seeder
             'github_account'=>'annie',
             'discord_username' => 'annie',
             'user_id' => 28,
+            'be_rating' => 10,
+            'fe_rating' => 10,
+            'ui_ux_rating' => 10,
             'created_at' => Carbon::now('Asia/Manila'),
             'updated_at' => Carbon::now('Asia/Manila')
         ]);

@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('github_account', 100);
             $table->string('discord_username', 100);
             $table->bigInteger('user_id')->unsigned();
+            $table->integer('be_rating');
+            $table->integer('fe_rating');
+            $table->integer('ui_ux_rating');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
