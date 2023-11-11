@@ -452,4 +452,9 @@ class EventsController extends Controller
             'data'  => $judges
         ],200);
     }
+
+    public function getNumberOfJudges(Int $event_id, EventsService $eventService)
+    {
+        return $eventService->getNumberOfJudges($event_id);
+    }
 }
