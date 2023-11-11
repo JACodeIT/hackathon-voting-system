@@ -27,7 +27,7 @@ class EventsSeeder extends Seeder
             'brgy_address' => 1,
             'complete_address' => '',
             'status' => 'Upcoming',
-            'banner_url' => 'https://daedalus.codes/neon-robot.webp',
+            'banner_url' => 'https://bit.ly/event-banner-hackvote',
             'isGroup' => '1',
             'number_of_members' => '5',
             'public_can_vote' => '0',

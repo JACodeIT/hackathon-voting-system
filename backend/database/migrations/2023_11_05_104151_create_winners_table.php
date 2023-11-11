@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('event_id')->unsigned();
             $table->bigInteger('squad_id')->unsigned();
-            $table->tinyInteger('position');
+            $table->tinyInteger('rank');
+            $table->decimal('rating',5,2);
             $table->longText('awards')->nullable();
             $table->timestamps();
 
