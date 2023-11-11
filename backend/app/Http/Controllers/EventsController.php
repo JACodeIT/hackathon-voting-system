@@ -87,11 +87,10 @@ class EventsController extends Controller
         return response()->json([
             'success'   => true,
             'data'      => [
-                'events' => Events::with('organizer', 'judges.account', 'criteria.criterion')
+                'events' => Events::with('organizer', 'judges.account', 'criteria.criterion','squads.leader')
                                 ->where('id', $id)
                                 ->get(),
                 'number_of_squads' => Event_Squads::where('event_id', $id)->count(),
-                'squads'    => $squadService->getEventSquads($id),
             ],
         ],200);
     }
