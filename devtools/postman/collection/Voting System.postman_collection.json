@@ -1034,6 +1034,25 @@
 						"header": []
 					},
 					"response": []
+				},
+				{
+					"name": "Get Event Criteria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_gateway}}api/events/1/criteria",
+							"host": [
+								"{{api_gateway}}api"
+							],
+							"path": [
+								"events",
+								"1",
+								"criteria"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
