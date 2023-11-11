@@ -9,11 +9,11 @@ class EventsService
 {
     public function getMaxScoreRating(Int $event_id, Int $judge_id)
     {
-        return DB::table('judges_scoreboards as js')
-                    ->join('event_criterias as ec', 'ec.id', '=', 'js.event_criteria')
-                    ->join('criterias as cria','cria.id', '=', 'js.event_criteria')
+        return DB::table('event_criterias as ec')
+                    // ->join('event_criterias as ec', 'ec.id', '=', 'js.event_criteria')
+                    ->join('criterias as cria','cria.id', '=', 'ec.criteria_id')
                     ->where('ec.event_id', $event_id)
-                    ->where('js.event_judge', $judge_id)
+                    // ->where('js.event_judge', $judge_id)
                     ->select((DB::raw('SUM(cria.max_rating) as score')))
                     ->first();
     }
