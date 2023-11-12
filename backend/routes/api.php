@@ -52,6 +52,7 @@ Route::group([
     Route::post('/events/{event}/criteria', [EventsController::class, 'addCriteriaToEvent']);
     Route::delete('/events/{event}/criteria/{criteria}', [EventsController::class, 'removeCriteriaToEvent']);
     Route::get('/events/{event}/judges', [EventsController::class, 'getEventJudges']);
+    Route::get('/events/{event}/judgesByUserID/{user}', [EventsController::class, 'getEventJudgesByUserID']);
     Route::post('/events/{event}/judges', [EventsController::class, 'addJudgeToEvent']);
     Route::delete('/events/{event}/judges/{judge}', [EventsController::class, 'removeJudgeToEvent']);
     Route::post('/events/{event}/judges/{judges}/squads/{squads}/scores', [EventsController::class, 'recordEventJudgeSquadScores']);

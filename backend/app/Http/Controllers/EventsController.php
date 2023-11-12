@@ -454,6 +454,22 @@ class EventsController extends Controller
         ],200);
     }
 
+    public function getEventJudgesByUserID(Int $event_id, Int $user_id)
+    {
+        $judges = DB::table('event_judges')
+                    ->join('events','events.id', '=', 'event_judges.event_id')
+                    ->join('members','members.id', '=', 'event_judges.member_id')
+                    ->join('users','users.id', '=', 'members.user_id')
+                    ->select('event_judges.id as judge_id', 'events.topic as eventTopic','members.id as member_id','users.id as user_id',DB::raw('CONCAT(members.first_name, " ", members.last_name) as name'))
+                    ->where('event_judges.event_id', $event_id)
+                    ->where('users.id', $user_id)
+                    ->get();
+        return response()->json([
+            'message' => 'Judges for '.Events::find($event_id)->topic,
+            'data'  => $judges
+        ],200);
+    }
+
     public function getNumberOfJudges(Int $event_id, EventsService $eventService)
     {
         return $eventService->getNumberOfJudges($event_id);
