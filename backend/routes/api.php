@@ -75,6 +75,7 @@ Route::group([
     Route::resource('criterias', CriteriaController::class, ['only' => ['index', 'show', 'store', 'update']]);
 
     Route::post('/community-votes', [CommunityVotesController::class, 'store']);
+    Route::get('/community-votes/events/{events}/member/{member}/hasVoted', [CommunityVotesController::class, 'checkIfMemberHasVoted']);
     Route::get('/community-votes/events/{events}/squads/{squads}', [CommunityVotesController::class, 'getEventSquadCommunityVotes']);
 
     Route::post('/public-votes', [PublicVotesController::class, 'store']);

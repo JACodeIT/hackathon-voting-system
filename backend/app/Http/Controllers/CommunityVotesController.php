@@ -125,4 +125,66 @@ class CommunityVotesController extends Controller
                     ->where('squad_id', $squad_id)
                     ->first();
     }
+
+    public function checkIfMemberHasVoted(Int $event_id, Int $member_id)
+    {
+        $voteData = [
+            'event_id' => $event_id,
+            'member_id' => $member_id
+        ];
+        $verifier = [];
+
+        $event = Events::find($event_id);
+        $maxVotesPerMember = $event->member_numbers_of_vote;
+        $memberHasVoted = CommunityVotes::where('event_id', $event_id)->where('member_id', $member_id)->get();
+        $eventJudge = Event_Judges::where('event_id', $event_id)->where('member_id', $member_id)->get();
+
+        for($i=0;$i < count($memberHasVoted);$i++){
+            $holder = [
+                'event_id' => $memberHasVoted[$i]->event_id,
+                'member_id' => $memberHasVoted[$i]->member_id
+            ];
+            array_push($verifier,$holder);
+        }
+
+        $canVote = true;
+        $reason = "";
+
+
+        // Check if Voter is a judge
+        if(count($eventJudge) > 0){
+            $canVote = false;
+            $reason  = 'Voter is already a member of Judges for this event.';
+        }
+
+        // Member can vote flag
+        if(!$event->member_can_vote){
+            $canVote = false;
+            $reason = 'Event does not allow voting from community members.';
+        }
+
+        // Max votes per member
+        if(count($memberHasVoted) >= $maxVotesPerMember){
+            $canVote = false;
+            $reason = $maxVotesPerMember === 1 ? 'Member has already voted' : 'Member has already voted '.$maxVotesPerMember.' times';
+        }
+
+        // Member cannot vote on the same squad
+        if(in_array($voteData,$verifier)){
+            $canVote = false;
+            $reason = 'Member cannot vote on the same squad.';
+        }
+
+        return response()->json([
+            'message'   => '',
+            'data'      =>
+            [
+                'canVote' => $canVote,
+                'reason' => $reason,
+                'memberHasVoted' => count($memberHasVoted) > 0 ? true : false,
+                'eventAllowedVotes' => Events::find($event_id)->member_numbers_of_vote,
+                'remainingVotes' => Events::find($event_id)->member_numbers_of_vote - count($memberHasVoted)
+            ]
+        ],200);
+    }
 }
