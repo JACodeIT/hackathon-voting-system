@@ -1064,7 +1064,7 @@
 							"formdata": [
 								{
 									"key": "squad_id",
-									"value": "2",
+									"value": "5",
 									"type": "text"
 								}
 							]
@@ -1559,6 +1559,28 @@
 										"1",
 										"squads",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "check If member can vote",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_gateway}}api/community-votes/events/1/member/9/hasVoted",
+									"host": [
+										"{{api_gateway}}api"
+									],
+									"path": [
+										"community-votes",
+										"events",
+										"1",
+										"member",
+										"9",
+										"hasVoted"
 									]
 								}
 							},
