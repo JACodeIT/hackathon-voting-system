@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             EventJudgesSeeder::class,
             EventSquadsSeeder::class,
             SquadMembersSeeder::class,
-            JudgesScoreboardSeeder::class,
+            // JudgesScoreboardSeeder::class,
         ]);
     }
 }

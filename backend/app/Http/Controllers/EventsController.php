@@ -463,7 +463,7 @@ class EventsController extends Controller
                     ->select('event_judges.id as judge_id', 'events.topic as eventTopic','members.id as member_id','users.id as user_id',DB::raw('CONCAT(members.first_name, " ", members.last_name) as name'))
                     ->where('event_judges.event_id', $event_id)
                     ->where('users.id', $user_id)
-                    ->get();
+                    ->first();
         return response()->json([
             'message' => 'Judges for '.Events::find($event_id)->topic,
             'data'  => $judges
