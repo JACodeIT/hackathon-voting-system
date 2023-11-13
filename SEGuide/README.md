@@ -64,8 +64,8 @@ What is needed to set up the dev environment. For instance, global dependencies 
 
 ### Setting up Dev
 What is needed to set up the dev environment. For instance, global dependencies or any other tools. include download links.
-#### Setup GrubMarket B2B on Source Tree
-1. Create a bitbucket folder for **ackathon-voting-system** repository on your local machine
+#### Setup on Source Tree
+1. Create a bitbucket folder for **hackathon-voting-system** repository on your local machine
 2. Login to your Bitbucket account and go to [hackathon-voting-system](https://github.com/JACodeIT/hackathon-voting-system) repository
 3. Click the clone button
 
