@@ -1,0 +1,61 @@
+version: "3.8"
+services:
+  hackvote_app:
+    container_name: hackvote_app
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    expose:
+      - 9000
+    volumes:
+      - .:/usr/src/app
+      - ./public:/usr/src/app/public
+    depends_on:
+      - hackvote_db
+    networks:
+      - app_network
+
+  hackvote_nginx:
+    container_name: hackvote_nginx
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    volumes:
+    - ./public:/usr/src/app/public
+    ports:
+      - 8000:80
+    depends_on:
+      - hackvote_app
+    environment:
+      NGINX_FPM_HOST: hackvote_app
+      NGINX_ROOT: /usr/src/app/public
+    networks:
+      - app_network
+
+  hackvote_db:
+    container_name: hackvote_db
+    image: mysql:8.0.20
+    restart: always
+    volumes:
+      - ./storage/db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: hackvote_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      - app_network
+
+  hackvote_redis:
+    container_name: hackvote_redis
+    image: redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
