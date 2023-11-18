@@ -92,17 +92,39 @@ What is needed to set up the dev environment. For instance, global dependencies 
     ```shell
     cd /backend
     ```
-2. For macOS/linux, run the command below to generate a key
+2. Run Composer install
     ```shell
-    php artisan key:generate --ansi
+    composer install
     ```
-3. Migrate Database
+3. Make a local copy of .env
     ```shell
-    php artisan migrate
+    cp .env.example .env
     ```
-4. Build and run the service
+4. Update DB credentials
+    ```.env
+        DB_CONNECTION=mysql
+        DB_HOST=hackvote_db
+        DB_PORT=3306
+        DB_DATABASE=hackvote_db
+        DB_USERNAME=root
+        DB_PASSWORD=root
+    ```
+5. Run Docker Compose Build and Up
     ```shell
-    php artisan serve
+    docker-compose build
+    docker-compose up -d
+    ```
+6. Open Bash on docker to run php artisan commands
+    ```shell
+    docker-compose exec hackvote_app bash
+    ```
+2. Run the command below to generate a key
+    ```shell
+    php artisan key:generate
+    ```
+3. Migrate & Seed Database
+    ```shell
+    php artisan migrate:fresh --seed
     ```
 5. Web UI Service will run in http://localhost:8000
 
